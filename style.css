@@ -128,9 +128,7 @@ nav ul {
   .global-padding {
     padding: 20px 40px;
   }
-}
-/* screen size: 1440px+ */
-@media (min-width: 1440px) {
+
   .burger {
     display: none;
   }
@@ -143,13 +141,14 @@ nav ul {
     position: initial;
     height: auto;
     width: auto;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 500;
     padding-top: 0;
   }
   nav ul {
     flex-direction: row;
     justify-content: center;
+    gap: 35px;
   }
 
   nav {
@@ -158,5 +157,23 @@ nav ul {
   .logo,
   .menu-link {
     flex: 0 0 auto;
+    gap: 5px;
+  }
+  .menu-link img {
+    height: 20px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .menu-link {
+    gap: 10px;
+  }
+
+  .nav-block {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  nav ul {
+    gap: 50px;
   }
 }
