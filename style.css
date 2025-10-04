@@ -10,6 +10,9 @@ body {
   background-color: #e1d4c9;
   overflow-x: hidden;
 }
+body {
+  margin-top: 80px;
+}
 
 ul,
 ol {
@@ -81,7 +84,12 @@ button {
 }
 
 .header-container {
-  position: relative;
+  position: fixed;
+  left: 15px;
+  right: 15px;
+  top: 0;
+  height: 80px;
+  background-color: #e1d4c9;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -251,6 +259,11 @@ nav ul {
 @media (min-width: 620px) {
   .global-padding {
     padding: 20px 40px;
+  }
+  .header-container {
+    left: 40px;
+    right: 40px;
+    padding: 20px 0;
   }
   /* main */
   .hero-section h1 {
