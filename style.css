@@ -76,7 +76,7 @@ button {
 }
 
 .header-container {
-  padding: 10px;
+  padding: 15px;
   position: relative;
   display: flex;
   align-items: center;
@@ -118,4 +118,42 @@ nav ul {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+/* screen size: 768px+ */
+@media (min-width: 768px) {
+  .header-container {
+    padding: 20px 40px;
+  }
+}
+/* screen size: 1440px+ */
+@media (min-width: 1440px) {
+  .burger {
+    display: none;
+  }
+  .nav-block {
+    visibility: initial;
+    opacity: 1;
+    flex: 1;
+    flex-direction: row;
+    gap: unset;
+    position: initial;
+    height: auto;
+    width: auto;
+    font-size: 18px;
+    font-weight: 500;
+    padding-top: 0;
+  }
+  nav ul {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  nav {
+    flex: 1;
+  }
+  .logo,
+  .menu-link {
+    flex: 0 0 auto;
+  }
 }
