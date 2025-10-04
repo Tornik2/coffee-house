@@ -123,6 +123,59 @@ nav ul {
   gap: 16px;
 }
 
+/************ footer ***********/
+
+.footer-container {
+  padding: 100px 60px;
+  background-color: #665f55;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+.footer-container h1 {
+  color: #e1d4c9;
+}
+.footer-container .accent {
+  color: #b0907a;
+  font-style: italic;
+}
+.social-link {
+  height: 60px;
+  width: 60px;
+}
+.social-links {
+  margin-top: 40px;
+  display: flex;
+  gap: 12px;
+}
+
+.social-link:hover {
+  background-color: #e1d4c9;
+  border-radius: 30px;
+}
+.social-link:hover svg path {
+  stroke: #403f3d;
+}
+
+.contact-info {
+  color: #e1d4c9;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  letter-spacing: 0.2px;
+}
+.contact-info ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.contact-info li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* screen size: 768px+ */
 @media (min-width: 768px) {
   .global-padding {
@@ -165,6 +218,9 @@ nav ul {
 }
 
 @media (min-width: 1000px) {
+  .global-padding {
+    padding: 20px 40px;
+  }
   .menu-link {
     gap: 10px;
   }
