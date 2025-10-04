@@ -31,3 +31,39 @@ button {
   cursor: pointer;
   font: inherit;
 }
+
+/* Nav */
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  border: 1.3px solid #665f55;
+  height: 44px;
+  width: 44px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.burger span {
+  display: block;
+  height: 2px;
+  width: 16px;
+  background: #403f3d;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.burger.open {
+  gap: 0;
+  border-color: #403f3d;
+}
+.burger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(0.7px, 0px);
+}
+
+.burger.open span:nth-child(2) {
+  transform: rotate(-45deg) translate(1.3px, -1px);
+}
