@@ -8,6 +8,7 @@ html,
 body {
   font-family: "Inter", sans-serif;
   background-color: #e1d4c9;
+  overflow-x: hidden;
 }
 
 ul,
@@ -88,9 +89,9 @@ button {
 
 .nav-block {
   position: absolute;
-  left: 0;
-  top: 80px;
-  width: 100%;
+  left: -30px;
+  top: 0px;
+  width: 100vw;
   height: 100vh;
   background-color: transparent;
   color: #403f3d;
@@ -110,7 +111,9 @@ button {
 .nav-block.active {
   visibility: initial;
   opacity: 1;
+  top: 80px;
 }
+
 nav ul {
   display: flex;
   flex-direction: column;
@@ -231,5 +234,21 @@ nav ul {
   }
   nav ul {
     gap: 50px;
+  }
+}
+
+/* screen size: 1440px+ */
+@media (min-width: 1440px) {
+  .footer-container {
+    flex-direction: row;
+    align-items: center;
+    padding: 100px;
+  }
+  .footer-container > * {
+    flex: 1 1 50%;
+  }
+  .footer-container h1 {
+    font-size: 52px;
+    font-weight: 500;
   }
 }
