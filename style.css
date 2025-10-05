@@ -245,8 +245,6 @@ nav ul {
   grid-template-columns: 1fr;
   gap: 40px;
 }
-.images img {
-}
 
 #top-right-image,
 #bottom-left-image {
@@ -444,8 +442,7 @@ nav ul {
   }
   .right {
     grid-column: 3 / 4;
-    grid-row: 44;
-    margin-top: 40px;
+    grid-row: 48 / 107;
   }
   #top-right-image {
     display: block;
@@ -456,7 +453,6 @@ nav ul {
   #bottom-left-image {
     display: block;
     grid-column: 1/2;
-    grid-row: span 43;
-    margin-top: 40px;
+    grid-row: 64 / 107;
   }
 }
