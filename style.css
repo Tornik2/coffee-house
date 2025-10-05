@@ -9,6 +9,7 @@ body {
   font-family: "Inter", sans-serif;
   background-color: #e1d4c9;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 body {
   margin-top: 80px;
