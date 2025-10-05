@@ -1,4 +1,5 @@
 let productsData = [];
+const shownProducts = 4;
 
 // fetch products when page is loaded
 fetch("./products.json")
@@ -10,8 +11,13 @@ fetch("./products.json")
   });
 //render products function
 function renderProducts(products) {
+  let productsToShow = products;
+  if (window.innerWidth <= 768) {
+    productsToShow = products.slice(0, shownProducts);
+  }
+
   productsGrid.innerHTML = "";
-  const productsHtml = products
+  const productsHtml = productsToShow
     .map((prod) => {
       return `
         <div class="product-card">
