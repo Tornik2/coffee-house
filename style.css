@@ -255,6 +255,52 @@ nav ul {
   display: none;
   height: 430px;
 }
+/* get app section*/
+.get-app-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 70px;
+}
+.get-app-section-left {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.download-links {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  gap: 10px;
+}
+.app-link {
+  display: flex;
+  gap: 10px;
+  padding: 15px 25px;
+  border: 1px solid #665f55;
+  border-radius: 40px;
+  cursor: pointer;
+  justify-content: flex-start;
+  max-width: 200px;
+  min-width: 200px;
+}
+.app-link:hover {
+  background-color: #665f55;
+}
+.app-link:hover p {
+  color: #e1d4c9;
+}
+.app-link:hover path {
+  fill: #e1d4c9;
+}
+.get-app-section-right {
+  margin-top: 40px;
+}
+
+@media (min-width: 480px) {
+  .download-links {
+    flex-direction: row;
+  }
+}
 
 @media (min-width: 620px) {
   .global-padding {
@@ -335,6 +381,18 @@ nav ul {
   }
   .hero-menu-link {
     width: fit-content;
+  }
+  .get-app-section {
+    flex-direction: row;
+    gap: 100px;
+    align-items: center;
+  }
+  .get-app-section-left,
+  .get-app-section-right {
+    width: 50%;
+  }
+  .get-app-section-right {
+    margin-top: 0;
   }
 }
 

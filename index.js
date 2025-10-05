@@ -13,6 +13,7 @@ burgerIcon.addEventListener("click", () => {
   }
 });
 
+// close nav when navItem is clicked
 navItems.forEach((item) => {
   item.addEventListener("click", () => {
     burgerIcon.classList.remove("open");
