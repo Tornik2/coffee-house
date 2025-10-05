@@ -85,6 +85,7 @@ button {
 }
 
 .header-container {
+  z-index: 1000;
   position: fixed;
   left: 15px;
   right: 15px;

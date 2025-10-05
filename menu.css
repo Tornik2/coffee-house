@@ -34,3 +34,55 @@
 .filter-btn.selected span {
   background-color: #e1d4c9;
 }
+
+/* product list */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 310px));
+  gap: 40px;
+  justify-content: center;
+}
+.product-card {
+  margin: 0 auto;
+  height: 506px;
+  width: 310;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #c1b6ad;
+  border-radius: 40px;
+  overflow: hidden;
+  color: #403f3d;
+}
+.product-desc-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+.product-desc-container p:last-child {
+  margin-top: auto;
+}
+.product-image-container {
+  height: 310px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 40px;
+}
+.product-image-container img {
+  width: 100%;
+  height: 100%;
+  transition: all 0.2s ease-in-out;
+}
+.product-image-container:hover img {
+  transform: scale(1.1);
+}
+
+@media (min-width: 766px) {
+  .products-grid {
+  }
+}
+@media (min-width: 1150px) {
+  .products-grid {
+  }
+}
