@@ -1,19 +1,27 @@
 let productsData = [];
-const shownProducts = 4;
-
+let shownProducts = 4;
+let filter = "";
+let allProductsShown = false;
 // fetch products when page is loaded
 fetch("./products.json")
   .then((res) => res.json())
   .then((data) => {
     productsData = data;
-    console.log(productsData);
     renderProducts(productsData); //render after data is retreived
   });
 //render products function
 function renderProducts(products) {
+  // on smaller screens show only 4
   let productsToShow = products;
+  console.log(products);
   if (window.innerWidth <= 768) {
     productsToShow = products.slice(0, shownProducts);
+  }
+
+  if (allProductsShown || window.innerWidth > 768) {
+    loadMoreBtn.style.display = "none";
+  } else {
+    loadMoreBtn.style.display = "flex";
   }
 
   productsGrid.innerHTML = "";
@@ -42,14 +50,31 @@ function filterProducts(products, filter) {
     return prod.category === filter;
   });
 }
-//
+// load more function
+function loadMore(products) {
+  allProductsShown = true;
+
+  let productsToShow = products;
+  if (filter) {
+    productsToShow = filterProducts(productsToShow, filter);
+  }
+
+  shownProducts = productsToShow.length;
+  renderProducts(productsToShow);
+}
+//when to show load more btn
+
+////////////////////////
+const loadMoreBtn = document.querySelector(".load-more-btn");
 const productFilterBtns = document.querySelectorAll(".prod-filter-btn");
 const productsGrid = document.querySelector(".products-grid");
 
 productFilterBtns.forEach((btn, idx) => {
   btn.addEventListener("click", () => {
+    shownProducts = 4;
+    allProductsShown = false;
     const wasSelected = btn.classList.contains("selected"); //check if filter was set already
-    const filter = wasSelected ? "" : btn.dataset.filter;
+    filter = wasSelected ? "" : btn.dataset.filter;
     console.log(btn.dataset.filter);
     productFilterBtns.forEach((btn) => btn.classList.remove("selected")); // onlick toggle/choose selected filter
     if (wasSelected) {
@@ -65,3 +90,5 @@ productFilterBtns.forEach((btn, idx) => {
     }
   });
 });
+
+loadMoreBtn.addEventListener("click", () => loadMore(productsData));
