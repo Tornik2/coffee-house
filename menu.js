@@ -29,6 +29,14 @@ function renderProducts(products) {
     .join("");
   productsGrid.innerHTML = productsHtml;
 }
+//filtering function
+function filterProducts(products, filter) {
+  return products.filter((prod) => {
+    console.log(prod.category, filter);
+    return prod.category === filter;
+  });
+}
+//
 const productFilterBtns = document.querySelectorAll(".prod-filter-btn");
 const productsGrid = document.querySelector(".products-grid");
 
@@ -36,11 +44,18 @@ productFilterBtns.forEach((btn, idx) => {
   btn.addEventListener("click", () => {
     const wasSelected = btn.classList.contains("selected"); //check if filter was set already
     const filter = wasSelected ? "" : btn.dataset.filter;
+    console.log(btn.dataset.filter);
     productFilterBtns.forEach((btn) => btn.classList.remove("selected")); // onlick toggle/choose selected filter
     if (wasSelected) {
       btn.classList.remove("selected");
     } else {
       btn.classList.add("selected");
+    }
+    if (filter) {
+      const filteredProducts = filterProducts(productsData, filter);
+      renderProducts(filteredProducts);
+    } else {
+      renderProducts(productsData);
     }
   });
 });

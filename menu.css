@@ -77,12 +77,3 @@
 .product-image-container:hover img {
   transform: scale(1.1);
 }
-
-@media (min-width: 766px) {
-  .products-grid {
-  }
-}
-@media (min-width: 1150px) {
-  .products-grid {
-  }
-}
