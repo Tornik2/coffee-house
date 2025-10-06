@@ -23,4 +23,18 @@ function prevSlide() {
   slidesContainer.style.transform = `translateX(-${index * 100}%)`;
 }
 
-slidesContainer.addEventListener("click", () => prevSlide());
+slidesContainer.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+slidesContainer.addEventListener("touchend", (e) => {
+  const touchEndX = e.changedTouches[0].screenX;
+  const distance = touchEndX - touchStartX;
+
+  if (Math.abs(distance) > 40) {
+    if (distance > 0) {
+      prevSlide();
+    } else {
+      nextSlide();
+    }
+  }
+});
