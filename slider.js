@@ -1,6 +1,7 @@
 const slidesContainer = document.querySelector(".slides");
 const slides = document.querySelectorAll(".slide");
-
+const leftArrow = document.querySelector(".left-arrow");
+const rightArrow = document.querySelector(".right-arrow");
 let index = 0;
 
 // function for next slide
@@ -23,6 +24,7 @@ function prevSlide() {
   slidesContainer.style.transform = `translateX(-${index * 100}%)`;
 }
 
+// logic for swiping
 slidesContainer.addEventListener("touchstart", (e) => {
   touchStartX = e.changedTouches[0].screenX;
 });
@@ -38,3 +40,6 @@ slidesContainer.addEventListener("touchend", (e) => {
     }
   }
 });
+// arrows functionality
+leftArrow.addEventListener("click", () => prevSlide());
+rightArrow.addEventListener("click", () => nextSlide());
