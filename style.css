@@ -215,9 +215,13 @@ nav ul {
 /************* SLIDER ***************/
 .slider {
   width: 100%;
-  max-width: 480px;
-  margin: 40px auto 0;
   overflow: hidden;
+  margin: 0 auto;
+}
+@media (min-width: 480px) {
+  .slider {
+    width: 480px;
+  }
 }
 
 .slides {
@@ -234,7 +238,9 @@ nav ul {
   gap: 16px;
   text-align: center;
   color: #403f3d;
+  margin-top: 20px;
 }
+
 @media (min-width: 480px) {
   .hero-section .heading-1 {
     font-weight: 500;
@@ -351,9 +357,11 @@ nav ul {
 /* screen size: 768px+ */
 
 @media (min-width: 768px) {
+  /* //dissapear the burger */
   .burger {
     display: none;
   }
+
   .nav-block {
     visibility: initial;
     opacity: 1;
@@ -390,6 +398,27 @@ nav ul {
   .hero-section .heading-1 {
     font-weight: 500;
     font-size: 72px;
+  }
+  /* slider arrows appear */
+  .slider-container {
+    position: relative;
+  }
+  .arrow {
+    position: absolute;
+    cursor: pointer;
+    top: 290px;
+  }
+  .arrow:hover svg {
+    fill: #665f55;
+  }
+  .arrow:hover path {
+    stroke: #e1d4c9;
+  }
+  .left-arrow {
+    left: 0;
+  }
+  .right-arrow {
+    right: 0;
   }
 }
 
