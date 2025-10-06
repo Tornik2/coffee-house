@@ -212,46 +212,6 @@ nav ul {
   font-size: 13px;
 }
 
-/************* SLIDER ***************/
-.slider {
-  width: 100%;
-  overflow: hidden;
-  margin: 0 auto;
-}
-@media (min-width: 480px) {
-  .slider {
-    width: 480px;
-  }
-}
-
-.slides {
-  display: flex;
-  transition: transform 0.4s ease;
-}
-
-.slide {
-  min-width: 100%;
-}
-.slide-description {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  text-align: center;
-  color: #403f3d;
-  margin-top: 20px;
-}
-
-@media (min-width: 480px) {
-  .hero-section .heading-1 {
-    font-weight: 500;
-    font-size: 42px;
-  }
-  .hero-section p {
-    font-weight: 300;
-    line-height: 1.5;
-    font-size: 16px;
-  }
-}
 .hero-menu-link {
   padding: 20px 60px;
   border-radius: 40px;
@@ -333,10 +293,70 @@ nav ul {
 .get-app-section-right {
   margin-top: 40px;
 }
+/************* SLIDER ***************/
+.slider {
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+@media (min-width: 480px) {
+  .slider {
+    width: 480px;
+  }
+}
 
+.slides {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.slide {
+  min-width: 100%;
+}
+.slide-description {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+  color: #403f3d;
+  margin-top: 20px;
+}
+.slider-progress-container {
+  height: 4px;
+  width: 140px;
+  margin: 40px auto 0;
+  display: flex;
+  justify-content: space-between;
+}
+.progress-bar {
+  width: 40px;
+  height: 100%;
+  background-color: #c1b6ad;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.fill {
+  width: 0%;
+  height: 100%;
+  transition: all 5s ease;
+  background-color: #403f3d;
+}
+.progress-bar.active .fill {
+  width: 100%;
+}
+/* RESPONSIVE DESIGN */
 @media (min-width: 480px) {
   .download-links {
     flex-direction: row;
+  }
+  .hero-section .heading-1 {
+    font-weight: 500;
+    font-size: 42px;
+  }
+  .hero-section p {
+    font-weight: 300;
+    line-height: 1.5;
+    font-size: 16px;
   }
 }
 

@@ -2,6 +2,8 @@ const slidesContainer = document.querySelector(".slides");
 const slides = document.querySelectorAll(".slide");
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
+const progressBarFills = document.querySelectorAll(".fill");
+
 let index = 0;
 
 // function for next slide
@@ -11,6 +13,7 @@ function nextSlide() {
   } else {
     index++;
   }
+  showProgressBar(index);
   slidesContainer.style.transform = `translateX(-${index * 100}%)`;
 }
 // function for previous slide
@@ -20,8 +23,19 @@ function prevSlide() {
   } else {
     index = index - 1;
   }
-  console.log(index);
+  showProgressBar(index);
   slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+}
+
+//function for progress bar
+function showProgressBar(index) {
+  //reset all bars
+  progressBarFills.forEach((bar) => {
+    bar.style.transition = "none";
+    bar.style.width = "0px";
+  });
+  progressBarFills[index].style.transition = "all 5s ease";
+  progressBarFills[index].style.width = "100%";
 }
 
 // logic for swiping
