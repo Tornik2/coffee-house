@@ -34,7 +34,7 @@ function showProgressBar(index) {
     bar.style.transition = "none";
     bar.style.width = "0px";
   });
-  progressBarFills[index].style.transition = "all 5s ease";
+  progressBarFills[index].style.transition = `all ${remainingTime}ms`;
   progressBarFills[index].style.width = "100%";
 }
 
@@ -57,3 +57,40 @@ slidesContainer.addEventListener("touchend", (e) => {
 // arrows functionality
 leftArrow.addEventListener("click", () => prevSlide());
 rightArrow.addEventListener("click", () => nextSlide());
+
+//interval for slider
+const intervalTime = 5000;
+let remainingTime = intervalTime;
+let timer;
+let startTime;
+
+function startTimer() {
+  console.log(remainingTime);
+  clearTimeout(timer);
+  startTime = Date.now(); // present time for new slide
+  timer = setTimeout(() => {
+    remainingTime = intervalTime; // when not paused remaining time stays 5 seconds
+    nextSlide();
+    startTimer(); // restart the cycle
+  }, remainingTime);
+}
+
+function pauseTimer() {
+  console.log(remainingTime);
+  clearTimeout(timer);
+  remainingTime = remainingTime - (Date.now() - startTime); // calculate passed time and substract to total interval
+  console.log(remainingTime);
+}
+
+function resumeTimer() {
+  startTimer(); // resumes timer with remaining time calculated from pauseTimer()
+}
+
+slidesContainer.addEventListener("mouseenter", pauseTimer);
+slidesContainer.addEventListener("mouseleave", resumeTimer);
+
+slidesContainer.addEventListener("touchstart", pauseTimer);
+slidesContainer.addEventListener("touchend", resumeTimer);
+
+startTimer();
+showProgressBar(index);
