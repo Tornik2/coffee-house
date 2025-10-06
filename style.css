@@ -202,13 +202,48 @@ nav ul {
   flex-direction: column;
   gap: 40px;
 }
-.hero-section h1 {
+.hero-section .heading-1 {
   font-weight: 500;
   font-size: 33px;
 }
 .hero-section p {
   font-weight: 300;
   line-height: 1.5;
+  font-size: 13px;
+}
+
+/************* SLIDER ***************/
+.slider {
+  width: 100%;
+  max-width: 480px;
+  margin: 40px auto 0;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+}
+
+.slide {
+  min-width: 100%;
+}
+.slide-description {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+  color: #403f3d;
+}
+@media (min-width: 480px) {
+  .hero-section .heading-1 {
+    font-weight: 500;
+    font-size: 42px;
+  }
+  .hero-section p {
+    font-weight: 300;
+    line-height: 1.5;
+    font-size: 16px;
+  }
 }
 .hero-menu-link {
   padding: 20px 60px;
@@ -350,6 +385,10 @@ nav ul {
   }
   .images-section-heading {
     font-size: 60px;
+  }
+  .hero-section .heading-1 {
+    font-weight: 500;
+    font-size: 72px;
   }
 }
 
