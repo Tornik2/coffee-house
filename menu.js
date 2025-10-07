@@ -92,3 +92,15 @@ productFilterBtns.forEach((btn, idx) => {
 });
 
 loadMoreBtn.addEventListener("click", () => loadMore(productsData));
+
+///////// MODAL
+productsGrid.addEventListener("click", (e) => {
+  const card = e.target.closest(".product-card");
+
+  const title = card.querySelector("h3").textContent;
+  const description = card.querySelector("p.medium").textContent;
+  const price = card.querySelector(".heading-3:last-child").textContent;
+  const imageSrc = card.querySelector("img").src;
+
+  console.log(title, description, imageSrc, price);
+});
