@@ -88,3 +88,82 @@
 .load-more-btn svg {
   cursor: pointer;
 }
+
+/* MODAL */
+.modal {
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: none;
+  visibility: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(43, 42, 40, 0.5);
+}
+.modal-content {
+  max-width: 320px;
+  background-color: antiquewhite;
+  padding: 16px;
+  border-radius: 30px;
+}
+.modal-description {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-header {
+  display: grid;
+  gap: 12px;
+}
+.modal-product-size,
+.modal-product-additives {
+  display: grid;
+  gap: 8px;
+}
+.size-btns,
+.additives-btns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.modal-filter-icon {
+  width: 31px;
+  height: 31px;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  display: block;
+  line-height: 1.1;
+}
+.modal-important-info {
+  display: flex;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid #c1b6ad;
+}
+.modal-important-info .caption {
+  font-weight: 400;
+}
+
+.modal-close-btn {
+  border: 1px solid #665f55;
+  padding: 10px;
+  border-radius: 50px;
+}
+.modal-close-btn:active,
+.modal-close-btn:focus {
+  background-color: #665f55;
+  color: #e1d4c9;
+}
+.modal-total {
+  display: flex;
+  justify-content: space-between;
+}
+.modal-image-div {
+  display: none;
+}

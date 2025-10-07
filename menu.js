@@ -93,14 +93,83 @@ productFilterBtns.forEach((btn, idx) => {
 
 loadMoreBtn.addEventListener("click", () => loadMore(productsData));
 
-///////// MODAL
-productsGrid.addEventListener("click", (e) => {
-  const card = e.target.closest(".product-card");
+// ///////// MODAL
+// <div class="modal">
+//       <div class="modal-content">
+//         <div class="modal-image-div"></div>
+//         <div class="modal-description">
+//           <div>
+//             <h3 class="modal-name heading-3"></h3>
+//             <p class="modal-product-description medium"></p>
+//           </div>
+//           <div class="modal-product-size">
+//             <p class="modaa-caption-size medium">Size</p>
+//             <div class="size-btns"></div>
+//           </div>
+//           <div class="modal-product-additives">
+//             <p class="modaa-caption-size medium">Additives</p>
+//             <div class="additives-btns"></div>
+//           </div>
+//           <h3 class="modal-total heading-3"></h3>
+//           <div class="modal-important-info"></div>
+//           <button class="modal-close-btn">Close</button>
+//         </div>
+//       </div>
+const modal = document.querySelector(".modal");
+const modalImgDiv = document.querySelector(".modal-image-div");
+const modalName = document.querySelector(".modal-name");
+const modalProductDescription = document.querySelector(
+  ".modal-product-description"
+);
+const modalPrice = document.querySelector(".modal-total");
+const sizeBtns = document.querySelector(".size-btns");
+const additivesBtns = document.querySelector(".additives-btns");
 
+productsGrid.addEventListener("click", (e) => {
+  const card = e.target.closest(".product-card"); //target clicked product
+  //extract clicked procuct content
   const title = card.querySelector("h3").textContent;
   const description = card.querySelector("p.medium").textContent;
   const price = card.querySelector(".heading-3:last-child").textContent;
-  const imageSrc = card.querySelector("img").src;
+  const imageSrc = card.querySelector("img").src.split("assets/")[1];
+  //fill the modal with extracted content
+  modalName.textContent = title;
+  modalProductDescription.textContent = description;
+  modalPrice.innerHTML = `<span>Total:</span>${price}`;
+  modalImgDiv.innerHTML = `<img src="./assets/${imageSrc}"  />`;
+  modal.style.display = "grid";
+  modal.style.visibility = "visible";
+  //filter buttons to display
+  sizeBtns.innerHTML = "";
+  additivesBtns.innerHTML = "";
+  let SizeFilterBtns = [];
+  let additivesFilterBtns = [];
+  if (filter === "dessert") {
+    SizeFilterBtns = [
+      { sizeIcon: "S", size: "50 g" },
+      { sizeIcon: "M", size: "100 g" },
+      { sizeIcon: "L", size: "200 g" },
+    ];
+    additivesFilterBtns = ["Berries", "Nuts", "Jam"];
+  } else {
+    SizeFilterBtns = [
+      { sizeIcon: "S", size: "200 ml" },
+      { sizeIcon: "M", size: "300 ml" },
+      { sizeIcon: "L", size: "400 ml" },
+    ];
+    const differentAdditive = filter === "coffee" ? "Cinnamon" : "Lemon"; // for only one different additive between coffe and tea
+    additivesFilterBtns = ["Sugar", differentAdditive, "Syrup"];
+  }
+  sizeBtns.innerHTML += SizeFilterBtns.map((btn) => {
+    return `<button class="filter-btn"><span class="modal-filter-icon">${btn.sizeIcon}</span>    ${btn.size}</button>`;
+  }).join("");
 
-  console.log(title, description, imageSrc, price);
+  additivesBtns.innerHTML += additivesFilterBtns
+    .map((btn, i) => {
+      return `<button class="filter-btn"><span class="modal-filter-icon">${
+        i + 1
+      }</span>${btn}</button>`;
+    })
+    .join("");
+  modal.style.display = "flex";
 });
