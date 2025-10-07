@@ -124,18 +124,23 @@ const modalProductDescription = document.querySelector(
 const modalPrice = document.querySelector(".modal-total");
 const sizeBtns = document.querySelector(".size-btns");
 const additivesBtns = document.querySelector(".additives-btns");
+let totalPrice;
+let basePrice;
 
 productsGrid.addEventListener("click", (e) => {
   const card = e.target.closest(".product-card"); //target clicked product
   //extract clicked procuct content
   const title = card.querySelector("h3").textContent;
   const description = card.querySelector("p.medium").textContent;
-  const price = card.querySelector(".heading-3:last-child").textContent;
+  basePrice = parseFloat(
+    card.querySelector(".heading-3:last-child").textContent.split("$").join("")
+  ).toFixed(2);
+  totalPrice = basePrice;
   const imageSrc = card.querySelector("img").src.split("assets/")[1];
   //fill the modal with extracted content
   modalName.textContent = title;
   modalProductDescription.textContent = description;
-  modalPrice.innerHTML = `<span>Total:</span>${price}`;
+  modalPrice.innerHTML = `<span>Total:</span>$${totalPrice}`;
   modalImgDiv.innerHTML = `<img src="./assets/${imageSrc}"  />`;
   modal.style.display = "grid";
   modal.style.visibility = "visible";
@@ -161,8 +166,12 @@ productsGrid.addEventListener("click", (e) => {
     additivesFilterBtns = ["Sugar", differentAdditive, "Syrup"];
   }
   sizeBtns.innerHTML += SizeFilterBtns.map((btn) => {
-    return `<button class="filter-btn"><span class="modal-filter-icon">${btn.sizeIcon}</span>    ${btn.size}</button>`;
+    return `<button " class="filter-btn"><span class="modal-filter-icon">${btn.sizeIcon}</span>    ${btn.size}</button>`;
   }).join("");
+  const firstSizeBtn = sizeBtns.querySelector(".filter-btn"); //get first size filter btn to be selected on the modal open
+  firstSizeBtn.classList.add("selected");
+  const sizeBtnsToSelect = sizeBtns.querySelectorAll(".filter-btn"); //add Event Listeners right after creating the buttons
+  sizeBtnsToSelect.forEach((btn) => btn.addEventListener("click", selectSize));
 
   additivesBtns.innerHTML += additivesFilterBtns
     .map((btn, i) => {
@@ -171,5 +180,61 @@ productsGrid.addEventListener("click", (e) => {
       }</span>${btn}</button>`;
     })
     .join("");
+  const additivesBtnsToSelect = additivesBtns.querySelectorAll(".filter-btn"); //add Event Listeners right after creating the buttons
+  additivesBtnsToSelect.forEach((btn) =>
+    btn.addEventListener("click", selectAdditives)
+  );
+
   modal.style.display = "flex";
 });
+
+//functions to make modal filter btns work
+function selectSize(e) {
+  console.log("i was clicked");
+  const btnsToSelect = sizeBtns.querySelectorAll(".filter-btn");
+  btnsToSelect.forEach((btn) => {
+    btn.classList.remove("selected");
+  });
+  const chosenSize = e.target.closest(".filter-btn");
+  chosenSize.classList.add("selected");
+
+  if (chosenSize.textContent.includes(300)) {
+    totalPrice = (parseFloat(basePrice) + parseFloat(0.5)).toFixed(2);
+    modalPrice.innerHTML = `<span>Total:</span>$${(
+      parseFloat(totalPrice) +
+      additivesSelected * 0.5
+    ).toFixed(2)}`;
+  } else if (chosenSize.textContent.includes(400)) {
+    totalPrice = (parseFloat(basePrice) + parseFloat(1.0)).toFixed(2);
+    modalPrice.innerHTML = `<span>Total:</span>$${(
+      parseFloat(totalPrice) +
+      additivesSelected * 0.5
+    ).toFixed(2)}`;
+  } else {
+    totalPrice = basePrice;
+    modalPrice.innerHTML = `<span>Total:</span>$${(
+      parseFloat(totalPrice) +
+      additivesSelected * 0.5
+    ).toFixed(2)}`;
+  }
+}
+
+let additivesSelected = 0;
+function selectAdditives(e) {
+  const chosenAdditive = e.target.closest(".filter-btn");
+  if (!chosenAdditive.classList.contains("selected")) {
+    chosenAdditive.classList.add("selected");
+    additivesSelected += 1;
+    modalPrice.innerHTML = `<span>Total:</span>$${(
+      parseFloat(totalPrice) +
+      additivesSelected * 0.5
+    ).toFixed(2)}`;
+  } else {
+    chosenAdditive.classList.remove("selected");
+    additivesSelected -= 1;
+    modalPrice.innerHTML = `<span>Total:</span>$${(
+      parseFloat(totalPrice) +
+      additivesSelected * 0.5
+    ).toFixed(2)}`;
+  }
+}

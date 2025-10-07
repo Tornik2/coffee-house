@@ -131,6 +131,9 @@
   gap: 8px;
   flex-wrap: wrap;
 }
+.modal .filter-btn.selected span {
+  color: #403f3d;
+}
 .modal-filter-icon {
   width: 31px;
   height: 31px;
