@@ -1,13 +1,14 @@
 let productsData = [];
 let shownProducts = 4;
-let filter = "";
 let allProductsShown = false;
+let filter = "coffee"; // coffee is selected as a category on page load
+
 // fetch products when page is loaded
 fetch("./products.json")
   .then((res) => res.json())
   .then((data) => {
     productsData = data;
-    renderProducts(productsData); //render after data is retreived
+    renderProducts(filterProducts(productsData, filter)); //render after data is retreived
   });
 //render products function
 function renderProducts(products) {
@@ -46,7 +47,6 @@ function renderProducts(products) {
 //filtering function
 function filterProducts(products, filter) {
   return products.filter((prod) => {
-    console.log(prod.category, filter);
     return prod.category === filter;
   });
 }
@@ -68,6 +68,7 @@ function loadMore(products) {
 const loadMoreBtn = document.querySelector(".load-more-btn");
 const productFilterBtns = document.querySelectorAll(".prod-filter-btn");
 const productsGrid = document.querySelector(".products-grid");
+productFilterBtns[0].classList.add("selected"); // coffee is selected as a category on page load
 
 productFilterBtns.forEach((btn, idx) => {
   btn.addEventListener("click", () => {
@@ -75,7 +76,7 @@ productFilterBtns.forEach((btn, idx) => {
     allProductsShown = false;
     const wasSelected = btn.classList.contains("selected"); //check if filter was set already
     filter = wasSelected ? "" : btn.dataset.filter;
-    console.log(btn.dataset.filter);
+
     productFilterBtns.forEach((btn) => btn.classList.remove("selected")); // onlick toggle/choose selected filter
     if (wasSelected) {
       btn.classList.remove("selected");
@@ -256,4 +257,16 @@ modal.addEventListener("click", (e) => {
   if (e.target === modal || e.target === closeModalBtn) {
     modal.style.display = "none";
   }
+});
+
+// if on menu page menu btn is disabled
+const currentPage = window.location.pathname;
+const menuBtn = document.querySelector(".menu-link");
+if (currentPage.includes("menu.html")) {
+  console.log(currentPage.includes("menu.html"));
+  menuBtn.style.paddingBottom = "5px";
+  menuBtn.style.borderBottom = "2px solid black";
+}
+menuBtn.addEventListener("click", () => {
+  return;
 });

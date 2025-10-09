@@ -183,7 +183,7 @@ nav ul {
   flex-direction: column;
   gap: 16px;
 }
-.contact-info li {
+.contact-info li a {
   display: flex;
   align-items: center;
   gap: 12px;
