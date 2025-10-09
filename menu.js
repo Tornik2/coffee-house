@@ -198,13 +198,19 @@ function selectSize(e) {
   const chosenSize = e.target.closest(".filter-btn");
   chosenSize.classList.add("selected");
 
-  if (chosenSize.textContent.includes(300)) {
+  if (
+    chosenSize.textContent.includes(300) ||
+    chosenSize.textContent.includes("100 g")
+  ) {
     totalPrice = (parseFloat(basePrice) + parseFloat(0.5)).toFixed(2);
     modalPrice.innerHTML = `<span>Total:</span>$${(
       parseFloat(totalPrice) +
       additivesSelected * 0.5
     ).toFixed(2)}`;
-  } else if (chosenSize.textContent.includes(400)) {
+  } else if (
+    chosenSize.textContent.includes(400) ||
+    chosenSize.textContent.includes("200 g")
+  ) {
     totalPrice = (parseFloat(basePrice) + parseFloat(1.0)).toFixed(2);
     modalPrice.innerHTML = `<span>Total:</span>$${(
       parseFloat(totalPrice) +
