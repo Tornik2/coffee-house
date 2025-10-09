@@ -105,12 +105,12 @@
   background-color: rgba(43, 42, 40, 0.5);
 }
 .modal-content {
-  max-width: 320px;
-  background-color: antiquewhite;
+  background-color: #e1d4c9;
   padding: 16px;
   border-radius: 30px;
 }
 .modal-description {
+  max-width: 310px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -169,4 +169,26 @@
 }
 .modal-image-div {
   display: none;
+}
+@media (min-width: 770px) {
+  .modal-image-div {
+    display: block;
+    width: 310px;
+  }
+  .modal-image-div img {
+    border-radius: 40px;
+  }
+  .modal-content {
+    display: flex;
+    gap: 20px;
+  }
+  .modal-description {
+    max-width: 326px;
+  }
+}
+
+@media (min-width: 1258px) {
+  .modal-description {
+    max-width: 458px;
+  }
 }
