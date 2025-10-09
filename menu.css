@@ -52,6 +52,7 @@
   border-radius: 40px;
   overflow: hidden;
   color: #403f3d;
+  cursor: pointer;
 }
 .product-desc-container {
   padding: 20px;
@@ -66,7 +67,6 @@
 .product-image-container {
   height: 310px;
   overflow: hidden;
-  cursor: pointer;
   border-radius: 40px;
 }
 .product-image-container img {
@@ -74,8 +74,11 @@
   height: 100%;
   transition: all 0.2s ease-in-out;
 }
-.product-image-container:hover img {
+.product-card:hover .product-image-container img {
   transform: scale(1.1);
+}
+.product-card:hover {
+  background-color: rgb(234, 225, 218);
 }
 
 /* load more */
@@ -102,7 +105,7 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  background-color: rgba(43, 42, 40, 0.5);
+  background-color: rgba(43, 42, 40, 0.8);
 }
 .modal-content {
   background-color: #e1d4c9;

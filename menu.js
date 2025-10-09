@@ -132,8 +132,10 @@ let basePrice;
 
 productsGrid.addEventListener("click", (e) => {
   if (e.target === productsGrid) return; /// return if product card isnt clicked
+
   const card = e.target.closest(".product-card"); //target clicked product
   //extract clicked procuct content
+
   const title = card.querySelector("h3").textContent;
   const description = card.querySelector("p.medium").textContent;
   basePrice = parseFloat(
@@ -148,6 +150,7 @@ productsGrid.addEventListener("click", (e) => {
   modalImgDiv.innerHTML = `<img src="./assets/${imageSrc}"  />`;
   modal.style.display = "grid";
   modal.style.visibility = "visible";
+  document.documentElement.style.overflow = "hidden";
   //filter buttons to display
   sizeBtns.innerHTML = "";
   additivesBtns.innerHTML = "";
@@ -250,13 +253,11 @@ function selectAdditives(e) {
 }
 
 // modal closing function
-function closeModal() {
-  modal.style.display = "none";
-}
 
 modal.addEventListener("click", (e) => {
   if (e.target === modal || e.target === closeModalBtn) {
     modal.style.display = "none";
+    document.documentElement.style.overflow = "auto";
   }
 });
 
