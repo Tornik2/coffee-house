@@ -115,6 +115,7 @@ loadMoreBtn.addEventListener("click", () => loadMore(productsData));
 //           <button class="modal-close-btn">Close</button>
 //         </div>
 //       </div>
+const closeModalBtn = document.querySelector(".modal-close-btn");
 const modal = document.querySelector(".modal");
 const modalImgDiv = document.querySelector(".modal-image-div");
 const modalName = document.querySelector(".modal-name");
@@ -128,6 +129,7 @@ let totalPrice;
 let basePrice;
 
 productsGrid.addEventListener("click", (e) => {
+  if (e.target === productsGrid) return; /// return if product card isnt clicked
   const card = e.target.closest(".product-card"); //target clicked product
   //extract clicked procuct content
   const title = card.querySelector("h3").textContent;
@@ -244,3 +246,14 @@ function selectAdditives(e) {
     ).toFixed(2)}`;
   }
 }
+
+// modal closing function
+function closeModal() {
+  modal.style.display = "none";
+}
+
+modal.addEventListener("click", (e) => {
+  if (e.target === modal || e.target === closeModalBtn) {
+    modal.style.display = "none";
+  }
+});
