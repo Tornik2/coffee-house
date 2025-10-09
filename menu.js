@@ -75,14 +75,15 @@ productFilterBtns.forEach((btn, idx) => {
     shownProducts = 4;
     allProductsShown = false;
     const wasSelected = btn.classList.contains("selected"); //check if filter was set already
-    filter = wasSelected ? "" : btn.dataset.filter;
+    filter = btn.dataset.filter;
 
-    productFilterBtns.forEach((btn) => btn.classList.remove("selected")); // onlick toggle/choose selected filter
     if (wasSelected) {
-      btn.classList.remove("selected");
-    } else {
-      btn.classList.add("selected");
+      return;
     }
+    productFilterBtns.forEach((btn) => btn.classList.remove("selected")); // onlick toggle/choose selected filter
+
+    btn.classList.add("selected");
+
     if (filter) {
       const filteredProducts = filterProducts(productsData, filter);
       renderProducts(filteredProducts);
