@@ -74,12 +74,6 @@
   height: 100%;
   transition: all 0.2s ease-in-out;
 }
-.product-card:hover .product-image-container img {
-  transform: scale(1.1);
-}
-.product-card:hover {
-  background-color: rgb(234, 225, 218);
-}
 
 /* load more */
 .load-more-btn {
@@ -161,8 +155,7 @@
   padding: 10px;
   border-radius: 50px;
 }
-.modal-close-btn:active,
-.modal-close-btn:focus {
+.modal-close-btn:active {
   background-color: #665f55;
   color: #e1d4c9;
 }
@@ -193,5 +186,24 @@
 @media (min-width: 1258px) {
   .modal-description {
     max-width: 458px;
+  }
+}
+
+/* hover effects */
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover .product-image-container img {
+    transform: scale(1.1);
+  }
+
+  .product-card:hover {
+    background-color: rgb(234, 225, 218);
+  }
+  .menu-link:hover::after {
+    width: 0%;
+  }
+
+  .modal-close-btn:hover {
+    background-color: #665f55;
+    color: #e1d4c9;
   }
 }
