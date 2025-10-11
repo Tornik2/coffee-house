@@ -256,12 +256,14 @@ modal.addEventListener("click", (e) => {
   if (e.target === modal || e.target === closeModalBtn) {
     modal.style.display = "none";
     document.documentElement.style.overflow = "auto";
+    additivesSelected = 0;
   }
 });
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     modal.style.display = "none";
     document.documentElement.style.overflow = "auto";
+    additivesSelected = 0;
   }
 });
 
