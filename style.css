@@ -96,7 +96,10 @@ button {
   align-items: center;
   justify-content: space-between;
 }
-
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
 .nav-block {
   position: absolute;
   left: 250px;
@@ -397,7 +400,7 @@ nav ul {
 }
 /* screen size: 768px+ */
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   /* //dissapear the burger */
   .burger {
     display: none;
@@ -445,6 +448,7 @@ nav ul {
     position: relative;
   }
   .arrow {
+    display: flex;
     position: absolute;
     cursor: pointer;
     top: 290px;

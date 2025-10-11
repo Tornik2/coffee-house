@@ -39,8 +39,8 @@
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 310px));
-  gap: 40px;
-  justify-content: center;
+
+  justify-content: space-between;
 }
 .product-card {
   margin: 0 auto;
