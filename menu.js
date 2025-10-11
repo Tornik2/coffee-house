@@ -258,8 +258,14 @@ modal.addEventListener("click", (e) => {
     document.documentElement.style.overflow = "auto";
   }
 });
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    modal.style.display = "none";
+    document.documentElement.style.overflow = "auto";
+  }
+});
 
-// if on menu page menu btn is disabled
+// if on menu page - menu btn is disabled
 const currentPage = window.location.pathname;
 const menuBtn = document.querySelector(".menu-link");
 if (currentPage.includes("menu.html")) {
