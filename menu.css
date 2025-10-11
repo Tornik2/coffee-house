@@ -39,13 +39,13 @@
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 310px));
-
-  justify-content: space-between;
+  gap: 40px;
+  justify-content: space-around;
 }
 .product-card {
   margin: 0 auto;
   height: 506px;
-  width: 310;
+  width: 310px;
   display: flex;
   flex-direction: column;
   border: 1px solid #c1b6ad;
