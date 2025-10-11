@@ -71,7 +71,6 @@ let timer;
 let startTime;
 
 function startTimer() {
-  console.log(remainingTime);
   clearTimeout(timer);
   startTime = Date.now(); // present time for new slide
   timer = setTimeout(() => {
@@ -82,7 +81,6 @@ function startTimer() {
 }
 
 function pauseTimer() {
-  console.log(remainingTime);
   clearTimeout(timer);
   remainingTime = remainingTime - (Date.now() - startTime); // calculate passed time and substract to total interval
   pauseBarProgress(index); // pause progress loading
