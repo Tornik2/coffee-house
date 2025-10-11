@@ -14,7 +14,6 @@ fetch("./products.json")
 function renderProducts(products) {
   // on smaller screens show only 4
   let productsToShow = products;
-  console.log(products);
   if (window.innerWidth <= 768) {
     productsToShow = products.slice(0, shownProducts);
   }
@@ -197,7 +196,6 @@ productsGrid.addEventListener("click", (e) => {
 
 //functions to make modal filter btns work
 function selectSize(e) {
-  console.log("i was clicked");
   const btnsToSelect = sizeBtns.querySelectorAll(".filter-btn");
   btnsToSelect.forEach((btn) => {
     btn.classList.remove("selected");
@@ -265,7 +263,6 @@ modal.addEventListener("click", (e) => {
 const currentPage = window.location.pathname;
 const menuBtn = document.querySelector(".menu-link");
 if (currentPage.includes("menu.html")) {
-  console.log(currentPage.includes("menu.html"));
   menuBtn.style.paddingBottom = "5px";
   menuBtn.style.borderBottom = "2px solid black";
 }
