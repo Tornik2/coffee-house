@@ -93,29 +93,21 @@ productFilterBtns.forEach((btn, idx) => {
 });
 
 loadMoreBtn.addEventListener("click", () => loadMore(productsData));
+// event listener on window resizing to decide show 4 or 8 products
+window.addEventListener("resize", () => {
+  let productsToRender = productsData;
 
-// ///////// MODAL
-// <div class="modal">
-//       <div class="modal-content">
-//         <div class="modal-image-div"></div>
-//         <div class="modal-description">
-//           <div>
-//             <h3 class="modal-name heading-3"></h3>
-//             <p class="modal-product-description medium"></p>
-//           </div>
-//           <div class="modal-product-size">
-//             <p class="modaa-caption-size medium">Size</p>
-//             <div class="size-btns"></div>
-//           </div>
-//           <div class="modal-product-additives">
-//             <p class="modaa-caption-size medium">Additives</p>
-//             <div class="additives-btns"></div>
-//           </div>
-//           <h3 class="modal-total heading-3"></h3>
-//           <div class="modal-important-info"></div>
-//           <button class="modal-close-btn">Close</button>
-//         </div>
-//       </div>
+  if (window.innerWidth <= 768) {
+    shownProducts = 4;
+    allProductsShown = false;
+    productsToRender = productsData.slice(0, shownProducts);
+  }
+  if (filter) {
+    productsToRender = filterProducts(productsToRender, filter);
+  }
+  renderProducts(productsToRender);
+});
+
 const closeModalBtn = document.querySelector(".modal-close-btn");
 const modal = document.querySelector(".modal");
 const modalImgDiv = document.querySelector(".modal-image-div");
