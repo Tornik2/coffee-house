@@ -13,7 +13,6 @@ function nextSlide() {
   } else {
     index++;
   }
-  showProgressBar(index);
   slidesContainer.style.transform = `translateX(-${index * 100}%)`;
 }
 // function for previous slide
@@ -23,7 +22,6 @@ function prevSlide() {
   } else {
     index = index - 1;
   }
-  showProgressBar(index);
   slidesContainer.style.transform = `translateX(-${index * 100}%)`;
 }
 
@@ -73,6 +71,19 @@ let startTime;
 function startTimer() {
   clearTimeout(timer);
   startTime = Date.now(); // present time for new slide
+
+  // reset + animate progress bar for the current index
+  progressBarFills.forEach((bar) => {
+    bar.style.transition = "none";
+    bar.style.width = "0%";
+  });
+
+  const currentBar = progressBarFills[index];
+  requestAnimationFrame(() => {
+    currentBar.style.transition = `all ${remainingTime}ms linear`;
+    currentBar.style.width = "100%";
+  });
+
   timer = setTimeout(() => {
     remainingTime = intervalTime; // when not paused remaining time stays 5 seconds
     nextSlide();
@@ -115,4 +126,3 @@ function resumeBarProgress(index) {
 }
 
 startTimer(); //start interval on the page load
-showProgressBar(index); // first bar starts filling as iterval starts
