@@ -97,14 +97,15 @@ loadMoreBtn.addEventListener("click", () => loadMore(productsData));
 window.addEventListener("resize", () => {
   let productsToRender = productsData;
 
-  if (window.innerWidth <= 768) {
-    shownProducts = 4;
-    allProductsShown = false;
-    productsToRender = productsData.slice(0, shownProducts);
-  }
   if (filter) {
     productsToRender = filterProducts(productsToRender, filter);
   }
+  if (window.innerWidth <= 768) {
+    shownProducts = 4;
+    allProductsShown = false;
+    productsToRender = productsToRender.slice(0, shownProducts);
+  }
+
   renderProducts(productsToRender);
 });
 
