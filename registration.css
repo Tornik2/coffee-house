@@ -1,0 +1,11 @@
+.page-title {
+  font-family: Inter;
+  font-weight: 600;
+  font-style: Semi Bold;
+  font-size: 60px;
+  leading-trim: NONE;
+  line-height: 125%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #403f3d;
+}
