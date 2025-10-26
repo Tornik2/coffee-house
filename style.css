@@ -319,6 +319,9 @@ nav ul {
   overflow: hidden;
   margin: 0 auto;
 }
+.slides img {
+  width: 97%;
+}
 @media (min-width: 480px) {
   .slider {
     width: 480px;

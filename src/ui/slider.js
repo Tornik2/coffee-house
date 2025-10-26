@@ -126,3 +126,44 @@ function resumeBarProgress(index) {
 }
 
 startTimer(); //start interval on the page load
+
+// fetch favorites on api
+// Loader and error element
+const loader = document.getElementById("menu-loader");
+const errorEl = document.getElementById("menu-error");
+
+loader.style.display = "block"; // start loader on page load
+
+// fetch products when page is loaded
+fetch(
+  "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com/products/favorites"
+)
+  .then((res) => {
+    if (!res.ok) {
+      throw new Error("Bad response: " + res.status);
+    }
+    return res.json();
+  })
+  .then((data) => {
+    const sliderHtml = data.data.map((item) => {
+      return `<div class="slide">
+                  <img src="./assets/list/${item.id}.png" alt="${item.category}" />
+                  <div class="slide-description">
+                    <h3 class="heading-3">${item.name}</h3>
+                    <p class="medium">
+                      ${item.description}
+                    </p>
+                    <h3 class="heading-3">$${item.price}</h3>
+                  </div>
+                </div>`;
+    });
+    const slidesDiv = document.querySelector(".slides");
+    slidesDiv.innerHTML = sliderHtml;
+  })
+  .catch((err) => {
+    console.error(err);
+    errorEl.style.display = "block";
+  })
+  .finally(() => {
+    loader.style.display = "none";
+  });
