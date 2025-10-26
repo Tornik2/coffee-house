@@ -145,9 +145,10 @@ fetch(
     return res.json();
   })
   .then((data) => {
-    const sliderHtml = data.data.map((item) => {
-      return `<div class="slide">
-                  <img src="./assets/list/${item.id}.png" alt="${item.category}" />
+    const sliderHtml = data.data
+      .map((item) => {
+        return `<div class="slide">
+                  <img style="width: 95%; margin:0 auto;" src="./assets/list/${item.id}.png" alt="${item.category}" />
                   <div class="slide-description">
                     <h3 class="heading-3">${item.name}</h3>
                     <p class="medium">
@@ -156,7 +157,8 @@ fetch(
                     <h3 class="heading-3">$${item.price}</h3>
                   </div>
                 </div>`;
-    });
+      })
+      .join("");
     const slidesDiv = document.querySelector(".slides");
     slidesDiv.innerHTML = sliderHtml;
   })
