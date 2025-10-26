@@ -3,16 +3,36 @@ let shownProducts = 4;
 let allProductsShown = false;
 let filter = "coffee"; // coffee is selected as a category on page load
 
+// Loader and error element
+const loader = document.getElementById("menu-loader");
+const errorEl = document.getElementById("menu-error");
+
+loader.style.display = "block"; // start loader on page load
+
 // fetch products when page is loaded
 fetch("https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com/products")
-  .then((res) => res.json())
+  .then((res) => {
+    if (!res.ok) {
+      throw new Error("Bad response: " + res.status);
+    }
+    return res.json();
+  })
   .then((data) => {
     const dataWithImages = data.data.map((prod, i) => {
+      // add images
       return { ...prod, image: `./assets/list/${i + 1}.png` };
     });
     console.log(dataWithImages);
     productsData = dataWithImages;
     renderProducts(filterProducts(productsData, filter)); //render after data is retreived
+  })
+  .catch((err) => {
+    console.error(err);
+    errorEl.style.display = "block";
+    loadMoreBtn.style.display = "none";
+  })
+  .finally(() => {
+    loader.style.display = "none";
   });
 //render products function
 function renderProducts(products) {
