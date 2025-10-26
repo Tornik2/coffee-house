@@ -207,3 +207,8 @@
     color: #e1d4c9;
   }
 }
+
+#modal-loader {
+  margin-right: auto;
+  margin-left: auto;
+}

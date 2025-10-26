@@ -52,7 +52,7 @@ function renderProducts(products) {
   const productsHtml = productsToShow
     .map((prod) => {
       return `
-        <div class="product-card">
+        <div class="product-card" data-id="${prod.id}">
             <div class="product-image-container">
                 <img src=${prod.image} />
             </div>
@@ -140,6 +140,7 @@ const modalName = document.querySelector(".modal-name");
 const modalProductDescription = document.querySelector(
   ".modal-product-description"
 );
+const modalLoader = document.getElementById("modal-loader");
 const modalPrice = document.querySelector(".modal-total");
 const sizeBtns = document.querySelector(".size-btns");
 const additivesBtns = document.querySelector(".additives-btns");
@@ -150,105 +151,183 @@ productsGrid.addEventListener("click", (e) => {
   if (e.target === productsGrid) return; /// return if product card isnt clicked
 
   const card = e.target.closest(".product-card"); //target clicked product
-  //extract clicked procuct content
+  //NEW MODAL
+  const productId = Number(card.dataset.id);
+  fetch(
+    `https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com/products/${productId}`
+  )
+    .then((res) => {
+      modalLoader.style.display = "block";
 
-  const title = card.querySelector("h3").textContent;
-  const description = card.querySelector("p.medium").textContent;
-  basePrice = parseFloat(
-    card.querySelector(".heading-3:last-child").textContent.split("$").join("")
-  ).toFixed(2);
-  totalPrice = basePrice;
-  const imageSrc = card.querySelector("img").src.split("assets/")[1];
+      if (!res.ok) {
+        throw new Error("Bad response: " + res.status);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data.data);
+
+      const { name, description, additives, sizes, price, discountPrice, id } =
+        data.data;
+
+      basePrice = parseFloat(price).toFixed(2);
+      totalPrice = basePrice;
+
+      let sizeBtnsHtml = "";
+      for (let key in sizes) {
+        sizeBtnsHtml += `<button class="filter-btn ${
+          key === "s" ? "selected" : ""
+        }"
+        data-price="${sizes[key].price}"
+        ><span class="modal-filter-icon">${key}</span>    ${
+          sizes[key].size
+        }</button>`;
+
+        console.log(key, sizes[key]);
+      }
+
+      const additivesBtnsHtml = additives
+        .map((btn, i) => {
+          return `<button class="filter-btn"><span class="modal-filter-icon">${
+            i + 1
+          }</span>${btn.name}</button>`;
+        })
+        .join("");
+      const modalHtml = `
+      <div class="modal-content" id="modal-content">
+        <div id="modal-loader" class="loader" style="display: block"></div>
+        <p id="modal-error" class="error-msg" style="display: none">
+          Something went wrong. Please, refresh the page
+        </p>
+        <div class="modal-image-div">
+          <img src="./assets/list/${productId}.png"  />
+        </div>
+        <div class="modal-description">
+          <div class="modal-header">
+            <h3 class="modal-name heading-3">${name}</h3>
+            <p class="modal-product-description medium">${description}</p>
+          </div>
+          <div class="modal-product-size">
+            <p class="modaa-caption-size medium">Size</p>
+            <div class="size-btns">${sizeBtnsHtml}</div>
+          </div>
+          <div class="modal-product-additives">
+            <p class="modaa-caption-size medium">Additives</p>
+            <div class="additives-btns">${additivesBtnsHtml}</div>
+          </div>
+          <h3 class="modal-total heading-3"><span>Total:</span>$${totalPrice}</h3>
+          <div class="modal-important-info">
+            <div>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_268_10265)">
+                  <path
+                    d="M8 7.66663V11"
+                    stroke="#403F3D"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M8 5.00667L8.00667 4.99926"
+                    stroke="#403F3D"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M7.99967 14.6667C11.6816 14.6667 14.6663 11.6819 14.6663 8.00004C14.6663 4.31814 11.6816 1.33337 7.99967 1.33337C4.31778 1.33337 1.33301 4.31814 1.33301 8.00004C1.33301 11.6819 4.31778 14.6667 7.99967 14.6667Z"
+                    stroke="#403F3D"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_268_10265">
+                    <rect width="16" height="16" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+            <p class="caption">
+              The cost is not final. Download our mobile app to see the final
+              price and place your order. Earn loyalty points and enjoy your
+              favorite coffee with up to 20% discount.
+            </p>
+          </div>
+          <button class="modal-close-btn">Add to cart</button>
+        </div>
+      </div>`;
+      modal.innerHTML = modalHtml;
+      const modalLoader = modal.querySelector("#modal-loader"); // now it exists
+      const modalError = modal.querySelector("#modal-error");
+      //size btns
+      const sizeBtns = document.querySelector(".size-btns");
+      const sizeBtnsToSelect = sizeBtns.querySelectorAll(".filter-btn"); //add Event Listeners right after creating the buttons
+      sizeBtnsToSelect.forEach((btn) =>
+        btn.addEventListener("click", (e) => {
+          console.log("iuhu");
+          const btnsToSelect = sizeBtns.querySelectorAll(".filter-btn");
+          btnsToSelect.forEach((btn) => {
+            btn.classList.remove("selected");
+          });
+          const chosenSize = e.target.closest(".filter-btn");
+          chosenSize.classList.add("selected");
+          let priceDelta = chosenSize.dataset.price;
+          const modalPrice = document.querySelector(".modal-total");
+
+          totalPrice = priceDelta;
+          modalPrice.innerHTML = `<span>Total:</span>$${(
+            parseFloat(totalPrice) +
+            additivesSelected * 0.5
+          ).toFixed(2)}`;
+        })
+      );
+      //additives btns
+      const additivesBtns = document.querySelector(".additives-btns");
+      const additivesBtnsToSelect =
+        additivesBtns.querySelectorAll(".filter-btn"); //add Event Listeners right after creating the buttons
+      additivesBtnsToSelect.forEach((btn) =>
+        btn.addEventListener("click", selectAdditives)
+      );
+    })
+    .catch((err) => {
+      console.error(err);
+
+      modal.innerHTML = `<div class="modal-content">
+        <p id="modal-error" class="error-msg" style="display: none">
+          Something went wrong. Please, refresh the page
+        </p>
+      </div>`;
+      const modalError = modal.querySelector("#modal-error");
+      modalError.style.display = "block";
+    })
+    .finally(() => {
+      const modalLoader = modal.querySelector("#modal-loader");
+      if (modalLoader) modalLoader.style.display = "none";
+    });
+
+  //NEW MODAL
+
   //fill the modal with extracted content
-  modalName.textContent = title;
-  modalProductDescription.textContent = description;
-  modalPrice.innerHTML = `<span>Total:</span>$${totalPrice}`;
-  modalImgDiv.innerHTML = `<img src="./assets/${imageSrc}"  />`;
   modal.style.display = "grid";
   modal.style.visibility = "visible";
   document.documentElement.style.overflow = "hidden";
   //filter buttons to display
-  sizeBtns.innerHTML = "";
-  additivesBtns.innerHTML = "";
-  let SizeFilterBtns = [];
-  let additivesFilterBtns = [];
-  if (filter === "dessert") {
-    SizeFilterBtns = [
-      { sizeIcon: "S", size: "50 g" },
-      { sizeIcon: "M", size: "100 g" },
-      { sizeIcon: "L", size: "200 g" },
-    ];
-    additivesFilterBtns = ["Berries", "Nuts", "Jam"];
-  } else {
-    SizeFilterBtns = [
-      { sizeIcon: "S", size: "200 ml" },
-      { sizeIcon: "M", size: "300 ml" },
-      { sizeIcon: "L", size: "400 ml" },
-    ];
-    const differentAdditive = filter === "coffee" ? "Cinnamon" : "Lemon"; // for only one different additive between coffe and tea
-    additivesFilterBtns = ["Sugar", differentAdditive, "Syrup"];
-  }
-  sizeBtns.innerHTML += SizeFilterBtns.map((btn) => {
-    return `<button " class="filter-btn"><span class="modal-filter-icon">${btn.sizeIcon}</span>    ${btn.size}</button>`;
-  }).join("");
-  const firstSizeBtn = sizeBtns.querySelector(".filter-btn"); //get first size filter btn to be selected on the modal open
-  firstSizeBtn.classList.add("selected");
-  const sizeBtnsToSelect = sizeBtns.querySelectorAll(".filter-btn"); //add Event Listeners right after creating the buttons
-  sizeBtnsToSelect.forEach((btn) => btn.addEventListener("click", selectSize));
-
-  additivesBtns.innerHTML += additivesFilterBtns
-    .map((btn, i) => {
-      return `<button class="filter-btn"><span class="modal-filter-icon">${
-        i + 1
-      }</span>${btn}</button>`;
-    })
-    .join("");
-  const additivesBtnsToSelect = additivesBtns.querySelectorAll(".filter-btn"); //add Event Listeners right after creating the buttons
-  additivesBtnsToSelect.forEach((btn) =>
-    btn.addEventListener("click", selectAdditives)
-  );
 
   modal.style.display = "flex";
 });
 
 //functions to make modal filter btns work
-function selectSize(e) {
-  const btnsToSelect = sizeBtns.querySelectorAll(".filter-btn");
-  btnsToSelect.forEach((btn) => {
-    btn.classList.remove("selected");
-  });
-  const chosenSize = e.target.closest(".filter-btn");
-  chosenSize.classList.add("selected");
-
-  if (
-    chosenSize.textContent.includes(300) ||
-    chosenSize.textContent.includes("100 g")
-  ) {
-    totalPrice = (parseFloat(basePrice) + parseFloat(0.5)).toFixed(2);
-    modalPrice.innerHTML = `<span>Total:</span>$${(
-      parseFloat(totalPrice) +
-      additivesSelected * 0.5
-    ).toFixed(2)}`;
-  } else if (
-    chosenSize.textContent.includes(400) ||
-    chosenSize.textContent.includes("200 g")
-  ) {
-    totalPrice = (parseFloat(basePrice) + parseFloat(1.0)).toFixed(2);
-    modalPrice.innerHTML = `<span>Total:</span>$${(
-      parseFloat(totalPrice) +
-      additivesSelected * 0.5
-    ).toFixed(2)}`;
-  } else {
-    totalPrice = basePrice;
-    modalPrice.innerHTML = `<span>Total:</span>$${(
-      parseFloat(totalPrice) +
-      additivesSelected * 0.5
-    ).toFixed(2)}`;
-  }
-}
+function selectSize(e) {}
 
 let additivesSelected = 0;
 function selectAdditives(e) {
+  const modalPrice = document.querySelector(".modal-total");
+
   const chosenAdditive = e.target.closest(".filter-btn");
   if (!chosenAdditive.classList.contains("selected")) {
     chosenAdditive.classList.add("selected");
