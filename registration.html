@@ -49,7 +49,7 @@
     </header>
     <main class="global-padding">
       <h1 class="page-title">Registration</h1>
-      <form action="">
+      <form action="" id="registration-form">
         <div class="top-row">
           <div class="field">
             <label for="reg-login">Login</label
@@ -60,6 +60,7 @@
               placeholder="username"
               required
             />
+            <p class="field-error" id="err-login"></p>
           </div>
           <div class="field">
             <label for="reg-password">Password</label
@@ -70,16 +71,18 @@
               placeholder="password"
               required
             />
+            <p class="field-error" id="err-password"></p>
           </div>
           <div class="field">
             <label for="reg-confirm">Confirm Password</label
             ><input
               id="reg-confirm"
-              name="confirmPassord"
+              name="confirmPawssord"
               type="password"
               placeholder="confirm-password"
               required
             />
+            <p class="field-error" id="err-confirm"></p>
           </div>
         </div>
         <div class="bottom-row">
@@ -87,10 +90,11 @@
             <label for="reg-city">City</label>
             <select id="reg-city" name="city" required>
               <option value="" selected disabled>City</option>
-              <option value="city-1">Kutaisi</option>
-              <option value="city-2">Madrid</option>
-              <option value="city-3">Bucharest</option>
+              <option value="Kutaisi">Kutaisi</option>
+              <option value="Madrid">Madrid</option>
+              <option value="Bucharest">Bucharest</option>
             </select>
+            <p class="field-error" id="err-city"></p>
           </div>
           <div class="field">
             <label for="reg-street">Street</label>
@@ -102,6 +106,9 @@
               aria-describedby="err-street"
             >
               <option value="" selected disabled>Street</option>
+              <option value="Gamsakhurdia">Gamsakhurdia</option>
+              <option value="sxva">Sxva</option>
+              <p class="field-error" id="err-street"></p>
               <!-- 10 streets based on selected city -->
             </select>
           </div>
@@ -117,12 +124,19 @@
               placeholder="2"
               required
             />
+            <p class="field-error" id="err-house"></p>
           </div>
           <fieldset class="field fieldset-pay">
             <legend>Pay by</legend>
             <div class="radio-pay">
               <label class="radio">
-                <input type="radio" name="payment" value="cash" required />
+                <input
+                  type="radio"
+                  name="payment"
+                  value="cash"
+                  checked
+                  required
+                />
                 <div class="radio-circle"><div class="small-circle"></div></div>
                 Cash
               </label>
@@ -132,12 +146,11 @@
                 Card
               </label>
             </div>
+            <p class="field-error" id="err-payment"></p>
           </fieldset>
         </div>
         <div class="form-actions">
-          <button type="submit" class="btn-submit" disabled>
-            Registration
-          </button>
+          <button type="submit" class="btn-submit">Registration</button>
         </div>
       </form>
     </main>
@@ -267,6 +280,6 @@
       </div>
     </footer>
     <script src="./src/pages/index.js"></script>
-    <script src="./src/ui/slider.js"></script>
+    <script src="./src/pages/registration.js"></script>
   </body>
 </html>
