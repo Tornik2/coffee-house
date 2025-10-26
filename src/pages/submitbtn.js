@@ -33,7 +33,7 @@ function checkFormValidity() {
 }
 
 const form = document.getElementById("registration-form");
-const submitBtn = form.getElementById("reg-btn-submit");
+const submitBtn = form.querySelector(".btn-submit");
 
 form.addEventListener("input", () => {
   submitBtn.disabled = !checkFormValidity();

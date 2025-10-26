@@ -89,3 +89,37 @@ function checkValidtion() {
 }
 
 /// Login functionality with backend
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const loginValue = loginInput.value;
+  const passValue = passwordInput.value;
+
+  const payload = {
+    login: loginValue,
+    password: passValue,
+  };
+  try {
+    const res = await fetch(
+      "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com/auth/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    const data = await res.json();
+    console.log(data);
+    if (res.ok) {
+      const { access_token, user } = data.data;
+
+      // save access token and user info in local storage
+      localStorage.setItem("token", access_token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      // redirect to menu page after successful registration
+      window.location.href = "./menu.html";
+      console.log(data);
+    }
+  } catch (error) {}
+});
