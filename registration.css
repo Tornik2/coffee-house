@@ -160,3 +160,8 @@ select option {
   border-radius: 20px;
   color: black;
 }
+
+input:focus,
+select:focus {
+  border: 1px solid black;
+}
