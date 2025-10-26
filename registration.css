@@ -106,7 +106,8 @@ select:invalid {
 }
 /* button */
 .btn-submit {
-  border: 1px solid #665f55;
+  border: 1px solid rgb(102, 95, 85);
+  background-color: rgba(102, 95, 85, 0);
   color: #403f3d;
   font-family: Inter;
   font-weight: 600;
@@ -119,6 +120,17 @@ select:invalid {
   padding: 10px;
   width: 200px;
   border-radius: 20px;
+  transition: all 0.2s linear;
+}
+.btn-submit:hover {
+  background-color: rgba(102, 95, 85, 0.1);
+}
+.btn-submit:disabled {
+  border: 1px solid #ccc; /* lighter border */
+  background-color: #f0f0f0; /* pale gray */
+  color: #aaa; /* faded text */
+  cursor: not-allowed; /* "forbidden" cursor */
+  opacity: 0.7; /* slightly faded look */
 }
 .form-actions {
   display: flex;

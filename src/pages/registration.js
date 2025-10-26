@@ -101,6 +101,64 @@ confirmInput.addEventListener("blur", () => {
 confirmInput.addEventListener("focus", () => {
   clearError(confirmInput, "err-confirm");
 });
+
+// street selection for the chosen city
+const streetsByCity = {
+  Kutaisi: [
+    "Rustaveli Ave",
+    "Tamar Mepe St",
+    "Chavchavadze St",
+    "Pushkin St",
+    "Galaktioni St",
+    "Tsereteli Ave",
+    "David Agmashenebeli Ave",
+    "Freedom Sq",
+    "Melikishvili St",
+    "Vaja Pshavela St",
+  ],
+  Madrid: [
+    "Gran Via",
+    "Alcala St",
+    "Princesa St",
+    "Serrano St",
+    "Velazquez St",
+    "Bravo Murillo St",
+    "Castellana Ave",
+    "Embajadores St",
+    "Recoletos St",
+    "Calle Mayor",
+  ],
+  Bucharest: [
+    "Unirii Blvd",
+    "Victoriei Ave",
+    "Dacia Blvd",
+    "Mosilor St",
+    "Stefan cel Mare Blvd",
+    "Magheru Blvd",
+    "Calea Dorobantilor",
+    "Calea Mosilor",
+    "Calea Rahovei",
+    "Bd Regina Elisabeta",
+  ],
+};
+const citySelect = document.getElementById("reg-city");
+const streetSelect = document.getElementById("reg-street");
+
+citySelect.addEventListener("change", () => {
+  const selectedCity = citySelect.value;
+
+  streetSelect.innerHTML = '<option value="" disabled selected>Street</option>';
+
+  //create option tags and populate street select tag with them
+  if (streetsByCity[selectedCity]) {
+    streetsByCity[selectedCity].forEach((street) => {
+      const option = document.createElement("option");
+      option.value = street;
+      option.textContent = street;
+      streetSelect.appendChild(option);
+    });
+  }
+});
 // utility functions for error showing
 function showError(input, errorId, message) {
   const errorEl = document.getElementById(errorId);
