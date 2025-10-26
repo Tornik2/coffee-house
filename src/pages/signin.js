@@ -89,6 +89,9 @@ function checkValidtion() {
 }
 
 /// Login functionality with backend
+const invalidCredentialsMessage = document.querySelector(
+  ".invalid-credentials"
+);
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const loginValue = loginInput.value;
@@ -108,18 +111,22 @@ form.addEventListener("submit", async (e) => {
       }
     );
 
-    const data = await res.json();
-    console.log(data);
-    if (res.ok) {
+    if (!res.ok) {
+      if ((res.status = 401)) {
+        invalidCredentialsMessage.style.display = "block";
+      }
+    } else {
+      const data = await res.json();
       const { access_token, user } = data.data;
 
       // save access token and user info in local storage
       localStorage.setItem("token", access_token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      // redirect to menu page after successful registration
+      // redirect to menu page after successful login
       window.location.href = "./menu.html";
-      console.log(data);
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error("Request failed:", error);
+  }
 });

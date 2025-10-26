@@ -172,3 +172,12 @@ select:focus {
   margin: 0 auto;
   margin-bottom: 60px;
 }
+.form-actions {
+  position: relative;
+}
+.invalid-credentials {
+  display: none;
+  position: absolute;
+  top: -30px;
+  color: red;
+}
