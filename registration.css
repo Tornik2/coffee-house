@@ -165,3 +165,10 @@ input:focus,
 select:focus {
   border: 1px solid black;
 }
+
+/* Login Page */
+#signin-form {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-bottom: 60px;
+}

@@ -48,111 +48,34 @@
       </div>
     </header>
     <main class="global-padding">
-      <h1 class="page-title">Registration</h1>
-      <form action="" id="registration-form">
-        <div class="top-row">
-          <div class="field">
-            <label for="reg-login">Login</label
-            ><input
-              id="reg-login"
-              name="login"
-              type="text"
-              placeholder="username"
-              required
-            />
-            <p class="field-error" id="err-login"></p>
-          </div>
-          <div class="field">
-            <label for="reg-password">Password</label
-            ><input
-              id="reg-password"
-              name="password"
-              type="password"
-              placeholder="password"
-              required
-            />
-            <p class="field-error" id="err-password"></p>
-          </div>
-          <div class="field">
-            <label for="reg-confirm">Confirm Password</label
-            ><input
-              id="reg-confirm"
-              name="confirmPawssord"
-              type="password"
-              placeholder="confirm-password"
-              required
-            />
-            <p class="field-error" id="err-confirm"></p>
-          </div>
+      <h1 class="page-title">Sign In</h1>
+      <form id="signin-form">
+        <div class="field">
+          <label for="signin-login">Login</label>
+          <input
+            id="signin-login"
+            name="login"
+            type="text"
+            placeholder="username"
+            required
+          />
+          <p class="field-error" id="err-signin-login"></p>
         </div>
-        <div class="bottom-row">
-          <div class="field">
-            <label for="reg-city">City</label>
-            <select id="reg-city" name="city" required>
-              <option value="" selected disabled>City</option>
-              <option value="Kutaisi">Kutaisi</option>
-              <option value="Madrid">Madrid</option>
-              <option value="Bucharest">Bucharest</option>
-            </select>
-            <p class="field-error" id="err-city"></p>
-          </div>
-          <div class="field">
-            <label for="reg-street">Street</label>
-            <select
-              id="reg-street"
-              name="street"
-              required
-              data-validate="select"
-              aria-describedby="err-street"
-            >
-              <option value="" selected disabled>Street</option>
-              <option value="Gamsakhurdia">Gamsakhurdia</option>
-              <option value="sxva">Sxva</option>
-              <p class="field-error" id="err-street"></p>
-              <!-- 10 streets based on selected city -->
-            </select>
-          </div>
-          <div class="field">
-            <label for="reg-house">House number</label>
-            <input
-              id="reg-house"
-              name="houseNumber"
-              type="number"
-              inputmode="numeric"
-              min="2"
-              step="1"
-              placeholder="2"
-              required
-            />
-            <p class="field-error" id="err-house"></p>
-          </div>
-          <fieldset class="field fieldset-pay">
-            <legend>Pay by</legend>
-            <div class="radio-pay">
-              <label class="radio">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="cash"
-                  checked
-                  required
-                />
-                <div class="radio-circle"><div class="small-circle"></div></div>
-                Cash
-              </label>
-              <label class="radio">
-                <input type="radio" name="payment" value="card" required />
-                <div class="radio-circle"><div class="small-circle"></div></div>
-                Card
-              </label>
-            </div>
-            <p class="field-error" id="err-payment"></p>
-          </fieldset>
+
+        <div class="field">
+          <label for="signin-password">Password</label>
+          <input
+            id="signin-password"
+            name="password"
+            type="password"
+            placeholder="password"
+            required
+          />
+          <p class="field-error" id="err-signin-password"></p>
         </div>
+
         <div class="form-actions">
-          <button type="submit" class="btn-submit" id="reg-btn-submit" disabled>
-            Registration
-          </button>
+          <button type="submit" class="btn-submit" disabled>Sign In</button>
         </div>
       </form>
     </main>
