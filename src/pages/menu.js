@@ -4,10 +4,14 @@ let allProductsShown = false;
 let filter = "coffee"; // coffee is selected as a category on page load
 
 // fetch products when page is loaded
-fetch("./products.json")
+fetch("https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com/products")
   .then((res) => res.json())
   .then((data) => {
-    productsData = data;
+    const dataWithImages = data.data.map((prod, i) => {
+      return { ...prod, image: `./assets/list/${i + 1}.png` };
+    });
+    console.log(dataWithImages);
+    productsData = dataWithImages;
     renderProducts(filterProducts(productsData, filter)); //render after data is retreived
   });
 //render products function
