@@ -59,13 +59,29 @@ function renderProducts(products) {
             <div class="product-desc-container">
                 <h3 class="heading-3">${prod.name}</h3>
                 <p class="medium">${prod.description}</p>
-                <p class="heading-3">$${prod.price}</p>
+                <div class="price-discount">
+                  <p class="heading-3 original-price discounted"> $${prod.price}</p>
+                  <p class="heading-3 discount-price">$${prod.discountPrice}</p>
+                </div>
+                
             </div>
         </div>
         `;
     })
     .join("");
   productsGrid.innerHTML = productsHtml;
+  // if no user no discount
+  let user = JSON.parse(localStorage.getItem("user")) || ""; // get user if there is one
+  const discountPriceDivs = document.querySelectorAll(".discount-price");
+  const originalPriceDivs = document.querySelectorAll(".original-price");
+  console.log(user);
+  if (!user) {
+    discountPriceDivs.forEach((p) => (p.style.display = "none"));
+    originalPriceDivs.forEach((p) => p.classList.remove("discounted"));
+  } else {
+    discountPriceDivs.forEach((p) => (p.style.display = "block"));
+    originalPriceDivs.forEach((p) => p.classList.add("discounted"));
+  }
 }
 //filtering function
 function filterProducts(products, filter) {

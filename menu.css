@@ -218,3 +218,23 @@
   gap: 24px;
   align-items: center;
 }
+
+.price-discount {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.original-price.discounted {
+  color: #c1b6ad;
+  position: relative;
+}
+.original-price.discounted::after {
+  position: absolute;
+  top: 48%;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 3px;
+  background-color: #c1b6ad;
+}
