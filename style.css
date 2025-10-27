@@ -676,3 +676,10 @@ nav ul {
   stroke: blue;
   fill: rgb(239, 234, 234);
 }
+.cart-icon:hover {
+  text-decoration: underline;
+}
+.cart-link {
+  display: flex;
+  gap: 5px;
+}

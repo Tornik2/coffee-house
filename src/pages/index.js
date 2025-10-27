@@ -20,3 +20,10 @@ navItems.forEach((item) => {
     nav.classList.remove("active");
   });
 });
+
+// show how many products are chosen in cart
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const cartLink = document.querySelector(".cart-link");
+if (cart.length > 0) {
+  cartLink.innerHTML += ` <p>${cart.length}</p>`;
+}
