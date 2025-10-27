@@ -212,3 +212,9 @@
   margin-right: auto;
   margin-left: auto;
 }
+
+.header-right {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}

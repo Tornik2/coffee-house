@@ -664,3 +664,15 @@ nav ul {
   font-weight: 500;
   font-size: 23px;
 }
+
+.header-right {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.cart-icon:hover svg,
+.cart-icon:hover svg path {
+  stroke: blue;
+  fill: rgb(239, 234, 234);
+}
