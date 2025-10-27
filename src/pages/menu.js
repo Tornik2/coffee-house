@@ -365,7 +365,6 @@ productsGrid.addEventListener("click", (e) => {
     })
     .catch((err) => {
       console.error(err);
-
       modal.innerHTML = `<div class="modal-content">
         <p id="modal-error" class="error-msg" style="display: none">
           Something went wrong. Please, refresh the page
@@ -464,7 +463,6 @@ modal.addEventListener("click", (e) => {
   if (e.target === closeModalBtn) {
     console.log(e.target);
     saveToCart(totalAdditives, totalSize, chosenProduct, totalPrice);
-
     modal.style.display = "none";
     document.documentElement.style.overflow = "auto";
     additivesSelected = 0;

@@ -39,6 +39,7 @@ function renderCartItems() {
       extra = [...extra, ...prod.additives];
       extra = extra.map((p) => ` ${p}`);
       cartList.innerHTML += `
+    <div id="cart-loader" class="loader cart-loader" style="display: none"></div>
     <div class="cart" data-index="${i}">
 <div class="cart-left">
     <div class="delete-icon">
@@ -85,4 +86,60 @@ cartList.addEventListener("click", (e) => {
   cartList.innerHTML = "";
   totalPrice = 0;
   renderCartItems();
+});
+
+// Confirmation
+const confirmBtn = document.querySelector(".confirm-btn");
+function confirmOrder() {
+  console.log(orderObject);
+}
+confirmBtn.addEventListener("click", async () => {
+  let cart = JSON.parse(localStorage.getItem("cart")) || []; // get cart if there is one
+  const orderList = cart.map((prod) => {
+    console.log(prod);
+    return {
+      productId: Number(prod.product.id),
+      size: "m",
+      additives: prod.additives,
+      quantity: 1,
+    };
+  });
+
+  const orderObject = {
+    items: orderList,
+    totalPrice: Number(totalPrice),
+  };
+  const cartLoader = document.querySelector(".cart-loader");
+  cartLoader.style.display = "block";
+  try {
+    const res = await fetch(
+      "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com/orders/confirm",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderObject),
+      }
+    );
+
+    const data = await res.json();
+    if (!res.ok) {
+      cartList.innerHTML = `
+            <div style="text-align: center; margin: 40px; display: flex; flex-direction: column; align-items: center; gap:20px"><h3 style:"margin-bottom: 20px">Something went wrong. Please, try again</h3>
+            <a style:"text-align: center; " class="cart-btn go-to-menu" href="./menu.html">Go To Menu</a></div>
+        `;
+    }
+    console.log(data);
+
+    localStorage.removeItem("cart");
+    renderCartItems();
+    cartList.innerHTML = `
+            <div style="text-align: center; margin: 40px;"><h3 style="text-align: center, margin: 40px">Thank you for your order! Our manager will contact you shortly</h3></div>
+        `;
+    totalPrice = 0;
+    address = "";
+    payBy = "";
+  } catch (err) {
+    console.error("Request failed:", err);
+    alert("Something went wrong. Please try again.");
+  }
 });
