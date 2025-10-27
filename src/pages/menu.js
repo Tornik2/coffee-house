@@ -222,7 +222,7 @@ productsGrid.addEventListener("click", (e) => {
         })
         .join("");
       const modalHtml = `
-      <div class="modal-content" id="modal-content">
+        <div class="modal-content" id="modal-content">
         <div id="modal-loader" class="loader" style="display: block"></div>
         <p id="modal-error" class="error-msg" style="display: none">
           Something went wrong. Please, refresh the page
@@ -292,7 +292,18 @@ productsGrid.addEventListener("click", (e) => {
           <button class="modal-close-btn">Add to cart</button>
         </div>
       </div>`;
+
       modal.innerHTML = modalHtml;
+      const discountPriceDiv = modal.querySelector(".discount-price");
+      const originalPriceDiv = modal.querySelector(".original-price");
+      console.log(user);
+      if (!user) {
+        discountPriceDiv.style.display = "none";
+        originalPriceDiv.classList.remove("discounted");
+      } else {
+        discountPriceDiv.style.display = "block";
+        originalPriceDiv.classList.add("discounted");
+      }
       const modalLoader = modal.querySelector("#modal-loader");
       const modalError = modal.querySelector("#modal-error");
       //size btns
@@ -330,6 +341,18 @@ productsGrid.addEventListener("click", (e) => {
                   ).toFixed(2)}</p>
                 </div>
           `;
+          const discountPriceDivs =
+            document.querySelectorAll(".discount-price");
+          const originalPriceDivs =
+            document.querySelectorAll(".original-price");
+          console.log(user);
+          if (!user) {
+            discountPriceDivs.forEach((p) => (p.style.display = "none"));
+            originalPriceDivs.forEach((p) => p.classList.remove("discounted"));
+          } else {
+            discountPriceDivs.forEach((p) => (p.style.display = "block"));
+            originalPriceDivs.forEach((p) => p.classList.add("discounted"));
+          }
         })
       );
       //additives btns
@@ -393,6 +416,16 @@ function selectAdditives(e) {
                   ).toFixed(2)}</p>
                 </div>
           `;
+    const discountPriceDiv = modal.querySelector(".discount-price");
+    const originalPriceDiv = modal.querySelector(".original-price");
+    console.log(user);
+    if (!user) {
+      discountPriceDiv.style.display = "none";
+      originalPriceDiv.classList.remove("discounted");
+    } else {
+      discountPriceDiv.style.display = "block";
+      originalPriceDiv.classList.add("discounted");
+    }
   } else {
     chosenAdditive.classList.remove("selected");
     const index = totalAdditives.indexOf(chosenAdditive.textContent.slice(1)); //find the index of additive to remove
@@ -410,6 +443,16 @@ function selectAdditives(e) {
                   ).toFixed(2)}</p>
                 </div>
           `;
+    const discountPriceDiv = modal.querySelector(".discount-price");
+    const originalPriceDiv = modal.querySelector(".original-price");
+    console.log(user);
+    if (!user) {
+      discountPriceDiv.style.display = "none";
+      originalPriceDiv.classList.remove("discounted");
+    } else {
+      discountPriceDiv.style.display = "block";
+      originalPriceDiv.classList.add("discounted");
+    }
   }
 }
 
