@@ -182,6 +182,7 @@ productsGrid.addEventListener("click", (e) => {
         if (key === "s") {
           totalSize = sizes[key];
         }
+
         sizeBtnsHtml += `<button class="filter-btn ${
           key === "s" ? "selected" : ""
         }"
