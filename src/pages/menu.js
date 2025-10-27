@@ -1,3 +1,5 @@
+import { saveToCart } from "./cart.js";
+
 let productsData = [];
 let shownProducts = 4;
 let allProductsShown = false;
@@ -146,7 +148,9 @@ const sizeBtns = document.querySelector(".size-btns");
 const additivesBtns = document.querySelector(".additives-btns");
 let totalPrice;
 let basePrice;
-
+let totalSize;
+let totalAdditives = [];
+let chosenProduct;
 productsGrid.addEventListener("click", (e) => {
   if (e.target === productsGrid) return; /// return if product card isnt clicked
 
@@ -169,17 +173,20 @@ productsGrid.addEventListener("click", (e) => {
 
       const { name, description, additives, sizes, price, discountPrice, id } =
         data.data;
-
+      chosenProduct = data.data; // set chosen product to make it ready to add to cart
       basePrice = parseFloat(price).toFixed(2);
       totalPrice = basePrice;
 
       let sizeBtnsHtml = "";
       for (let key in sizes) {
+        if (key === "s") {
+          totalSize = sizes[key];
+        }
         sizeBtnsHtml += `<button class="filter-btn ${
           key === "s" ? "selected" : ""
         }"
         data-price="${sizes[key].price}"
-        ><span class="modal-filter-icon">${key}</span>    ${
+        ><span class="modal-filter-icon">${key}</span> ${
           sizes[key].size
         }</button>`;
 
@@ -262,20 +269,22 @@ productsGrid.addEventListener("click", (e) => {
         </div>
       </div>`;
       modal.innerHTML = modalHtml;
-      const modalLoader = modal.querySelector("#modal-loader"); // now it exists
+      const modalLoader = modal.querySelector("#modal-loader");
       const modalError = modal.querySelector("#modal-error");
       //size btns
       const sizeBtns = document.querySelector(".size-btns");
       const sizeBtnsToSelect = sizeBtns.querySelectorAll(".filter-btn"); //add Event Listeners right after creating the buttons
       sizeBtnsToSelect.forEach((btn) =>
         btn.addEventListener("click", (e) => {
-          console.log("iuhu");
           const btnsToSelect = sizeBtns.querySelectorAll(".filter-btn");
           btnsToSelect.forEach((btn) => {
             btn.classList.remove("selected");
+            totalSize = ""; // remove every selected size
           });
           const chosenSize = e.target.closest(".filter-btn");
           chosenSize.classList.add("selected");
+          totalSize = chosenSize.textContent.split(" ").splice(1).join(""); // set new size to push to cart
+          console.log(totalSize);
           let priceDelta = chosenSize.dataset.price;
           const modalPrice = document.querySelector(".modal-total");
 
@@ -322,15 +331,18 @@ productsGrid.addEventListener("click", (e) => {
 });
 
 //functions to make modal filter btns work
-function selectSize(e) {}
 
 let additivesSelected = 0;
 function selectAdditives(e) {
   const modalPrice = document.querySelector(".modal-total");
 
   const chosenAdditive = e.target.closest(".filter-btn");
+
   if (!chosenAdditive.classList.contains("selected")) {
     chosenAdditive.classList.add("selected");
+    const additiveToPush = chosenAdditive.textContent.slice(1); // push chosen additive to total chosen additives
+    totalAdditives.push(additiveToPush);
+    console.log(totalAdditives);
     additivesSelected += 1;
     modalPrice.innerHTML = `<span>Total:</span>$${(
       parseFloat(totalPrice) +
@@ -338,6 +350,8 @@ function selectAdditives(e) {
     ).toFixed(2)}`;
   } else {
     chosenAdditive.classList.remove("selected");
+    const index = totalAdditives.indexOf(chosenAdditive.textContent.slice(1)); //find the index of additive to remove
+    totalAdditives.splice(index, 1); // remove the chosen additive
     additivesSelected -= 1;
     modalPrice.innerHTML = `<span>Total:</span>$${(
       parseFloat(totalPrice) +
@@ -349,7 +363,16 @@ function selectAdditives(e) {
 // modal closing function
 
 modal.addEventListener("click", (e) => {
-  if (e.target === modal || e.target === closeModalBtn) {
+  const closeModalBtn = document.querySelector(".modal-close-btn");
+
+  if (e.target === closeModalBtn) {
+    console.log(e.target);
+    saveToCart(totalAdditives, totalSize, chosenProduct, totalPrice);
+
+    modal.style.display = "none";
+    document.documentElement.style.overflow = "auto";
+    additivesSelected = 0;
+  } else if (e.target === modal) {
     modal.style.display = "none";
     document.documentElement.style.overflow = "auto";
     additivesSelected = 0;
