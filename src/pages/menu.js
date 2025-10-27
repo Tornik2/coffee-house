@@ -1,3 +1,4 @@
+let user = JSON.parse(localStorage.getItem("user")) || ""; // get user if there is one
 let productsData = [];
 let shownProducts = 4;
 let allProductsShown = false;
@@ -71,7 +72,6 @@ function renderProducts(products) {
     .join("");
   productsGrid.innerHTML = productsHtml;
   // if no user no discount
-  let user = JSON.parse(localStorage.getItem("user")) || ""; // get user if there is one
   const discountPriceDivs = document.querySelectorAll(".discount-price");
   const originalPriceDivs = document.querySelectorAll(".original-price");
   console.log(user);
@@ -164,6 +164,7 @@ let totalPrice;
 let basePrice;
 let totalSize;
 let totalAdditives = [];
+let totalDiscountPrice;
 let chosenProduct;
 productsGrid.addEventListener("click", (e) => {
   if (e.target === productsGrid) return; /// return if product card isnt clicked
@@ -190,9 +191,13 @@ productsGrid.addEventListener("click", (e) => {
       chosenProduct = data.data; // set chosen product to make it ready to add to cart
       basePrice = parseFloat(price).toFixed(2);
       totalPrice = basePrice;
-
+      let baseDiscountPrice = discountPrice;
       let sizeBtnsHtml = "";
       for (let key in sizes) {
+        if (sizes[key].discountPrice) {
+          console.log(sizes[key].discountPrice);
+          totalDiscountPrice = sizes[key].discountPrice;
+        }
         if (key === "s") {
           totalSize = sizes[key];
         }
@@ -201,6 +206,7 @@ productsGrid.addEventListener("click", (e) => {
           key === "s" ? "selected" : ""
         }"
         data-price="${sizes[key].price}"
+        data-discount-price="${totalDiscountPrice ? totalDiscountPrice : ""}"
         ><span class="modal-filter-icon">${key}</span> ${
           sizes[key].size
         }</button>`;
@@ -237,7 +243,10 @@ productsGrid.addEventListener("click", (e) => {
             <p class="modaa-caption-size medium">Additives</p>
             <div class="additives-btns">${additivesBtnsHtml}</div>
           </div>
-          <h3 class="modal-total heading-3"><span>Total:</span>$${totalPrice}</h3>
+          <h3 class="modal-total heading-3"><span>Total:</span><div class="price-discount">
+                  <p class="heading-3 original-price discounted"> $${totalPrice}</p>
+                  <p class="heading-3 discount-price">$${baseDiscountPrice}</p>
+                </div></h3>
           <div class="modal-important-info">
             <div>
               <svg
@@ -301,13 +310,26 @@ productsGrid.addEventListener("click", (e) => {
           totalSize = chosenSize.textContent.split(" ").splice(1).join(""); // set new size to push to cart
           console.log(totalSize);
           let priceDelta = chosenSize.dataset.price;
+          let priceDiscountDelta = chosenSize.dataset.discountPrice
+            ? chosenSize.dataset.discountPrice
+            : chosenSize.dataset.price;
           const modalPrice = document.querySelector(".modal-total");
 
           totalPrice = priceDelta;
-          modalPrice.innerHTML = `<span>Total:</span>$${(
-            parseFloat(totalPrice) +
-            additivesSelected * 0.5
-          ).toFixed(2)}`;
+          totalDiscountPrice = priceDiscountDelta;
+          console.log(chosenSize.dataset.discountPrice);
+          modalPrice.innerHTML = `<span>Total:</span>
+          <div class="price-discount">
+                  <p class="heading-3 original-price discounted"> $${(
+                    parseFloat(totalPrice) +
+                    additivesSelected * 0.5
+                  ).toFixed(2)}</p>
+                  <p class="heading-3 discount-price">$${(
+                    parseFloat(totalDiscountPrice) +
+                    additivesSelected * 0.5
+                  ).toFixed(2)}</p>
+                </div>
+          `;
         })
       );
       //additives btns
@@ -359,19 +381,35 @@ function selectAdditives(e) {
     totalAdditives.push(additiveToPush);
     console.log(totalAdditives);
     additivesSelected += 1;
-    modalPrice.innerHTML = `<span>Total:</span>$${(
-      parseFloat(totalPrice) +
-      additivesSelected * 0.5
-    ).toFixed(2)}`;
+    modalPrice.innerHTML = `<span>Total:</span>
+          <div class="price-discount">
+                  <p class="heading-3 original-price discounted"> $${(
+                    parseFloat(totalPrice) +
+                    additivesSelected * 0.5
+                  ).toFixed(2)}</p>
+                  <p class="heading-3 discount-price">$${(
+                    parseFloat(totalDiscountPrice) +
+                    additivesSelected * 0.5
+                  ).toFixed(2)}</p>
+                </div>
+          `;
   } else {
     chosenAdditive.classList.remove("selected");
     const index = totalAdditives.indexOf(chosenAdditive.textContent.slice(1)); //find the index of additive to remove
     totalAdditives.splice(index, 1); // remove the chosen additive
     additivesSelected -= 1;
-    modalPrice.innerHTML = `<span>Total:</span>$${(
-      parseFloat(totalPrice) +
-      additivesSelected * 0.5
-    ).toFixed(2)}`;
+    modalPrice.innerHTML = `<span>Total:</span>
+          <div class="price-discount">
+                  <p class="heading-3 original-price discounted"> $${(
+                    parseFloat(totalPrice) +
+                    additivesSelected * 0.5
+                  ).toFixed(2)}</p>
+                  <p class="heading-3 discount-price">$${(
+                    parseFloat(totalDiscountPrice) +
+                    additivesSelected * 0.5
+                  ).toFixed(2)}</p>
+                </div>
+          `;
   }
 }
 
