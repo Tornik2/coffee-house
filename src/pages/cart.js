@@ -22,17 +22,24 @@ if (!user) {
   payByDiv.innerHTML = payBy;
 }
 
-if (cart.length > 0) {
-  console.log(cart);
-  cart.map((prod) => {
-    console.log(Number(prod.total));
-    totalPrice += Number(prod.total);
-    let extra = [];
-    extra.push(prod.sizes.size);
-    extra = [...extra, ...prod.additives];
-    extra = extra.map((p) => ` ${p}`);
-    cartList.innerHTML += `
-    <div class="cart">
+renderCartItems();
+// update dom with cart function
+function renderCartItems() {
+  cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if (cart.length > 0) {
+    console.log(cart);
+    cartList.style.alignItems = "unset";
+
+    cart.map((prod, i) => {
+      console.log(Number(prod.total));
+      totalPrice += Number(prod.total);
+      let extra = [];
+      extra.push(prod.sizes.size);
+      extra = [...extra, ...prod.additives];
+      extra = extra.map((p) => ` ${p}`);
+      cartList.innerHTML += `
+    <div class="cart" data-index="${i}">
 <div class="cart-left">
     <div class="delete-icon">
         <img src="./assets/trash.svg" alt="Tras Icon" />
@@ -48,7 +55,34 @@ if (cart.length > 0) {
 </div>
 </div>
   `;
-  });
-  totalPriceHtml.textContent = "$" + totalPrice.toFixed(2);
-  console.log(cart);
+    });
+    totalPriceHtml.textContent = "$" + totalPrice.toFixed(2);
+  } else {
+    totalPrice = 0;
+    totalPriceHtml.textContent = "$" + totalPrice.toFixed(2);
+    cartList.style.alignItems = "center";
+    cartList.innerHTML = `
+    <h3  class="page-title"style="text-align: center; margin-top: 40px;margin-bottom:20px; font-size: 22px">Add Items</h3>
+     <a style:"text-align: center;" class="cart-btn go-to-menu" href="./menu.html">Go To Menu</a>
+
+    `;
+  }
 }
+
+// delete product from the cart function
+cartList.addEventListener("click", (e) => {
+  const trashIcon = e.target.closest(".delete-icon");
+  if (!trashIcon) {
+    return;
+  }
+
+  const productRow = trashIcon.closest(".cart");
+  const index = Number(productRow.dataset.index);
+
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  cartList.innerHTML = "";
+  totalPrice = 0;
+  renderCartItems();
+});
