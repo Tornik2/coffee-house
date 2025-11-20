@@ -8,8 +8,17 @@ const leftArrow = document.querySelector(".left-arrow") as HTMLElement | null;
 const rightArrow = document.querySelector(".right-arrow") as HTMLElement | null;
 const progressBarFills = document.querySelectorAll<HTMLElement>(".fill");
 
-// guard: if basic elements missing, do nothing
+// initialize slider only if elements exist
 if (slidesContainer && progressBarFills.length > 0) {
+  initSlider(slidesContainer, progressBarFills, leftArrow, rightArrow);
+}
+
+function initSlider(
+  slidesContainer: HTMLElement,
+  progressBarFills: NodeListOf<HTMLElement>,
+  leftArrow: HTMLElement | null,
+  rightArrow: HTMLElement | null
+): void {
   // ---- Slider State ----
   let index = 0;
   const intervalTime = 5000;
