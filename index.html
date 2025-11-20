@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="./styles/typography.css" />
     <title>Coffee House</title>
   </head>
-  <body>
+  <body class="dark">
     <header>
       <div class="container header-container">
         <div class="logo">
@@ -61,7 +61,11 @@
             </div>
             <a href="menu.html" class="menu-link"
               ><span>Menu</span
-              ><span><img src="./assets/images/coffee-cup.png" alt="" /></span
+              ><span
+                ><img
+                  style="filter: brightness(3.9)"
+                  src="./assets/images/coffee-cup.png"
+                  alt="" /></span
             ></a>
           </div>
         </div>
@@ -73,12 +77,13 @@
       </div>
     </header>
     <main class="global-padding">
+      <div class="eighty-px"></div>
       <div class="container">
         <section class="hero-section">
           <video autoplay loop playsinline muted class="bg-video">
             <source src="./assets/images/video-coffee.mp4" type="video/mp4" />
           </video>
-          <h2 class="heading-1">
+          <h2 class="heading-1" id="heading-1">
             <span style="font-style: italic; color: #b0907a">Enjoy</span>
             premium coffee at our charming cafe
           </h2>
@@ -98,10 +103,7 @@
           style="margin-top: 100px"
           class="slider-section"
         >
-          <h2
-            class="heading-2"
-            style="color: #403f3d; text-align: center; margin-bottom: 40px"
-          >
+          <h2 class="heading-2" style="text-align: center; margin-bottom: 40px">
             Choose your
             <span style="font-style: italic; color: #b0907a">favorite</span>
             coffee

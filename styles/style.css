@@ -11,8 +11,8 @@ body {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
-body {
-  margin-top: 80px;
+.eighty-px {
+  height: 80px;
 }
 
 ul,
@@ -682,4 +682,111 @@ nav ul {
 .cart-link {
   display: flex;
   gap: 5px;
+}
+
+/* -----   DARK MODE   -------*/
+
+body.dark {
+  background-color: #413e3e !important;
+  color: #f5f5f5 !important;
+}
+body.dark .burger {
+  border: 1px solid #e9e6e2;
+}
+body.dark .burger span {
+  background: #e9e6e2;
+}
+body.dark nav,
+body.dark .header-right {
+  background-color: #413e3e;
+  color: #e9e6e2;
+}
+
+body.dark .header-container,
+body.dark header {
+  background-color: #413e3e !important;
+}
+
+body.dark .nav a {
+  color: #f5f5f5 !important;
+}
+h2 {
+  color: #212121;
+}
+body.dark h2 {
+  color: #e9e6e2;
+}
+
+body.dark .arrow svg {
+  fill: #393737;
+}
+body.dark .arrow:hover svg {
+  fill: #746f6f;
+}
+body.dark .arrow path {
+  stroke: #d6d2c9;
+}
+
+body.dark .app-link svg path {
+  stroke: #eeeeed;
+}
+
+body.dark .footer-container {
+  background-color: #111 !important;
+  color: #eee !important;
+}
+
+body.dark .footer-container h1,
+body.dark .footer-container p,
+body.dark .contact-info {
+  color: #eee !important;
+}
+
+body.dark .images-section-container,
+body.dark .menu-category-container,
+body.dark .special-offer {
+  background-color: #2a2a2a !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark .slide-description {
+  color: #fff !important;
+}
+
+body.dark .progress-bar {
+  background-color: #878181 !important;
+}
+body.dark .fill {
+  background-color: #f4f1ed !important;
+}
+
+body.dark .modal-container {
+  background-color: #2b2b2b !important;
+  color: #fff !important;
+}
+
+body.dark button,
+body.dark .btn,
+body.dark .cart-btn {
+  background-color: #444 !important;
+  color: #fff !important;
+  border: 1px solid #777 !important;
+}
+
+body.dark button:hover,
+body.dark .btn:hover,
+body.dark .cart-btn:hover {
+  background-color: #555 !important;
+}
+
+body.dark input,
+body.dark select,
+body.dark option {
+  background-color: #333 !important;
+  color: #fff !important;
+  border: 1px solid #666 !important;
+}
+
+body.dark .error {
+  border-color: #ff7373 !important;
 }
