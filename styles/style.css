@@ -697,7 +697,8 @@ body.dark .burger span {
   background: #e9e6e2;
 }
 body.dark nav,
-body.dark .header-right {
+body.dark .header-right,
+body.dark .nav-block {
   background-color: #413e3e;
   color: #e9e6e2;
 }
@@ -730,7 +731,20 @@ body.dark .arrow path {
 body.dark .app-link svg path {
   stroke: #eeeeed;
 }
+body.dark .menu-link {
+  border-color: #b8b5b1;
+}
 
+body.dark .cart-icon svg,
+body.dark .cart-icon svg path {
+  stroke: white;
+  fill: #212121;
+}
+body.dark .cart-icon:hover svg,
+body.dark .cart-icon:hover svg path {
+  stroke: yellow;
+  fill: rgb(174, 174, 183);
+}
 body.dark .footer-container {
   background-color: #111 !important;
   color: #eee !important;

@@ -238,3 +238,15 @@
   height: 3px;
   background-color: #c1b6ad;
 }
+
+/* DARK */
+body.dark .product-card {
+  background-color: #272625;
+  color: #e1d4c9;
+}
+body.dark .product-card:hover {
+  background-color: #55534f;
+}
+body.dark .modal-content {
+  background-color: #55534f;
+}

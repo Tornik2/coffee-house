@@ -528,6 +528,9 @@ const menuBtn = document.querySelector(".menu-link") as HTMLElement | null;
 if (menuBtn && currentPage.includes("menu.html")) {
   menuBtn.style.paddingBottom = "5px";
   menuBtn.style.borderBottom = "2px solid black";
+  if (document.body.classList.contains("dark")) {
+    menuBtn.style.borderBottom = "2px solid white";
+  }
 
   menuBtn.addEventListener("click", (e) => {
     e.preventDefault(); // do nothing on click
