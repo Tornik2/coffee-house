@@ -181,3 +181,12 @@ select:focus {
   top: -30px;
   color: red;
 }
+
+/* DARK */
+body.dark .radio .radio-circle,
+body.dark .radio .small-circle {
+  background-color: #000000;
+}
+body.dark label {
+  color: #e9e6e2;
+}
