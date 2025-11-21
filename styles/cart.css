@@ -121,3 +121,15 @@
   margin-top: 0;
   margin-bottom: 40px;
 }
+
+/* DARK */
+body.dark .delete-icon {
+  filter: brightness(3.9);
+}
+body.dark .address-div p,
+body.dark .pay-div p,
+body.dark .price p,
+body.dark .cart-prod-desc p,
+body.dark .cart-prod-desc h3 {
+  color: #c2d5bd;
+}
