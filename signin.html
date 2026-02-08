@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./assets/thumbnail.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="typography.css" />
+    <link rel="stylesheet" href="registration.css" />
+    <title>Coffee House</title>
+  </head>
+  <body>
+    <header>
+      <div class="container header-container">
+        <div class="logo">
+          <a href="index.html"
+            ><img src="./assets/logo.png" alt="coffee house logo"
+          /></a>
+        </div>
+        <div class="nav-block">
+          <nav class="nav">
+            <ul class="nav-list">
+              <li><a href="#favorites">Favourite coffee</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#mobile">Mobile app</a></li>
+              <li><a href="#contacts">Contact us</a></li>
+            </ul>
+          </nav>
+
+          <div class="header-right">
+            <div class="cart-icon">
+              <a class="cart-link" href="cart.html" target="_blank">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M16.0942 8.36255L17.1455 15.1959C17.3319 16.4074 16.3945 17.5 15.1688 17.5H4.83122C3.60545 17.5 2.66809 16.4074 2.85448 15.1959L3.90576 8.36255C4.05586 7.38689 4.89536 6.66667 5.88251 6.66667H14.1175C15.1046 6.66667 15.9441 7.38689 16.0942 8.36255Z"
+                    stroke="#403F3D"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M11.6668 4.16667C11.6668 3.24619 10.9206 2.5 10.0002 2.5C9.07969 2.5 8.3335 3.24619 8.3335 4.16667"
+                    stroke="#403F3D"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+            <a href="menu.html" class="menu-link"
+              ><span>Menu</span
+              ><span><img src="./assets/coffee-cup.png" alt="" /></span
+            ></a>
+          </div>
+        </div>
+
+        <div class="burger">
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+    <main class="global-padding">
+      <h1 class="page-title">Sign In</h1>
+      <form id="signin-form">
+        <div class="field">
+          <label for="signin-login">Login</label>
+          <input
+            id="signin-login"
+            name="login"
+            type="text"
+            placeholder="username"
+            required
+          />
+          <p class="field-error" id="err-signin-login"></p>
+        </div>
+
+        <div class="field">
+          <label for="signin-password">Password</label>
+          <input
+            id="signin-password"
+            name="password"
+            type="password"
+            placeholder="password"
+            required
+          />
+          <p class="field-error" id="err-signin-password"></p>
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="submit"
+            class="btn-submit"
+            id="login-btn-submit"
+            disabled
+          >
+            Sign In
+          </button>
+          <p class="invalid-credentials">Incorrect login or password</p>
+        </div>
+      </form>
+    </main>
+    <footer id="contacts" class="global-padding">
+      <div class="footer-container container">
+        <div>
+          <h1>Sip, Savor, Smile.</h1>
+          <h1 class="accent">It's coffee time!</h1>
+          <div class="social-links">
+            <div class="social-link">
+              <a href="https://x.com" target="_blank">
+                <svg
+                  width="60"
+                  height="60"
+                  viewBox="0 0 60 60"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="0.5"
+                    y="0.5"
+                    width="59"
+                    height="59"
+                    rx="29.5"
+                    stroke="#C1B6AD"
+                  />
+                  <path
+                    d="M41 21.0101C41 21.0101 38.9821 22.2022 37.86 22.5401C37.2577 21.8476 36.4573 21.3567 35.567 21.134C34.6767 20.9112 33.7395 20.9673 32.8821 21.2945C32.0247 21.6218 31.2884 22.2045 30.773 22.9638C30.2575 23.7231 29.9877 24.6224 30 25.5401V26.5401C28.2426 26.5856 26.5013 26.1959 24.931 25.4055C23.3607 24.6151 22.0103 23.4487 21 22.0101C21 22.0101 17 31.0101 26 35.0101C23.9405 36.408 21.4872 37.109 19 37.0101C28 42.0101 39 37.0101 39 25.5101C38.9991 25.2315 38.9723 24.9537 38.92 24.6801C39.9406 23.6735 41 21.0101 41 21.0101Z"
+                    stroke="#E1D4C9"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div class="social-link">
+              <a href="https://facebook.com" target="_blank">
+                <svg
+                  width="60"
+                  height="60"
+                  viewBox="0 0 60 60"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="0.5"
+                    y="0.5"
+                    width="59"
+                    height="59"
+                    rx="29.5"
+                    stroke="#C1B6AD"
+                  />
+                  <path
+                    d="M35 20H32C30.6739 20 29.4021 20.5268 28.4645 21.4645C27.5268 22.4021 27 23.6739 27 25V28H24V32H27V40H31V32H34L35 28H31V25C31 24.7348 31.1054 24.4804 31.2929 24.2929C31.4804 24.1054 31.7348 24 32 24H35V20Z"
+                    stroke="#E1D4C9"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div class="social-link">
+              <a href="https://instagram.com" target="_blank">
+                <svg
+                  width="60"
+                  height="60"
+                  viewBox="0 0 60 60"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="0.5"
+                    y="0.5"
+                    width="59"
+                    height="59"
+                    rx="29.5"
+                    stroke="#C1B6AD"
+                  />
+                  <path
+                    d="M30 34C32.2091 34 34 32.2091 34 30C34 27.7909 32.2091 26 30 26C27.7909 26 26 27.7909 26 30C26 32.2091 27.7909 34 30 34Z"
+                    stroke="#E1D4C9"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M21 34V26C21 23.2386 23.2386 21 26 21H34C36.7614 21 39 23.2386 39 26V34C39 36.7614 36.7614 39 34 39H26C23.2386 39 21 36.7614 21 34Z"
+                    stroke="#E1D4C9"
+                  />
+                  <path
+                    d="M35.5 24.51L35.51 24.4989"
+                    stroke="#E1D4C9"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-info">
+          <h2>Contact us</h2>
+          <ul>
+            <li>
+              <a
+                href="https://www.google.com/maps?q=Tbilisi+Georgia"
+                target="_blank"
+              >
+                <img src="./assets/Ellipse.png" alt="ellipse" />8558 Green Rd.,
+                LA
+              </a>
+            </li>
+
+            <li>
+              <a href="tel:+1603555-0123">
+                <img src="./assets/phone.png" alt="phone icon" />+1 (603)
+                555-0123
+              </a>
+            </li>
+            <li>
+              <a>
+                <img src="./assets/clock.png" alt="clock icon" />Mon-Sat: 9:00
+                AM – 23:00 PM</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <script src="./src/pages/index.js"></script>
+    <script src="./src/pages/signin.js"></script>
+  </body>
+</html>
